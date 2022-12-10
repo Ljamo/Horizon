@@ -1,0 +1,3 @@
+[submodule "Horizon/vendor/spdlog"]
+	path = Horizon/vendor/spdlog
+	url = https://github.com/gabime/spdlog
