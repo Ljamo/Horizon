@@ -4,6 +4,15 @@
     <Filter Include="Horizon">
       <UniqueIdentifier>{6EE457B5-DAC3-D650-E3DB-61274F3A3DB2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Horizon\Events">
+      <UniqueIdentifier>{9288CE5E-7E56-C264-67EA-328B53579EC9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Horizon.h" />
@@ -16,9 +25,28 @@
     <ClInclude Include="src\Horizon\EntryPoint.h">
       <Filter>Horizon</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Events\ApplicationEvent.h">
+      <Filter>Horizon\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Events\Event.h">
+      <Filter>Horizon\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Events\KeyEvent.h">
+      <Filter>Horizon\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Events\MouseEvent.h">
+      <Filter>Horizon\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Log.h">
       <Filter>Horizon</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Window.h">
+      <Filter>Horizon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Application.cpp">
@@ -27,5 +55,9 @@
     <ClCompile Include="src\Horizon\Log.cpp">
       <Filter>Horizon</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hzpch.cpp" />
   </ItemGroup>
 </Project>

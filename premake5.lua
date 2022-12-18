@@ -1,7 +1,9 @@
 workspace "Horizon"
 	architecture "x64"
 	startproject "Sandbox"
-
+	staticruntime "on"
+	runtime "Release"
+	
 	configurations
 	{
 		"Debug",
@@ -11,6 +13,12 @@ workspace "Horizon"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Horizon/vendor/GLFW/include"
+
+include "Horizon/vendor/GLFW"
+
 project "Horizon"
 	location "Horizon"
 	kind "SharedLib"
@@ -18,6 +26,9 @@ project "Horizon"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "hzpch.h"
+	pchsource "Horizon/src/hzpch.cpp"
 
 	files
 	{
@@ -27,7 +38,15 @@ project "Horizon"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -62,6 +81,8 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "on"
+	runtime "Release"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -104,3 +125,8 @@ project "Sandbox"
 	filter "configurations:Dist"
 		defines "HZ_DIST"
 		optimize "On"
+
+project "GLFW"
+	location "GLFW"
+	staticruntime "on"
+	runtime "Release"
