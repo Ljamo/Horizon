@@ -37,6 +37,12 @@
     <ClInclude Include="src\Horizon\Events\MouseEvent.h">
       <Filter>Horizon\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Layer.h">
+      <Filter>Horizon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\LayerStack.h">
+      <Filter>Horizon</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Log.h">
       <Filter>Horizon</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Application.cpp">
+      <Filter>Horizon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Layer.cpp">
+      <Filter>Horizon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\LayerStack.cpp">
       <Filter>Horizon</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\Log.cpp">
