@@ -1,11 +1,13 @@
 #include "hzpch.h"
 #include "WindowsWindow.h"
 
-#include "Horizon/Log.h"
+//#include "Horizon/Log.h"
 
 #include "Horizon/Events/ApplicationEvent.h"
 #include "Horizon/Events/MouseEvent.h"
 #include "Horizon/Events/KeyEvent.h"
+
+#include <glad/glad.h>
 
 namespace Horizon {
 
@@ -50,6 +52,8 @@ namespace Horizon {
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		HZ_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

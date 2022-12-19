@@ -15,9 +15,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
+IncludeDir["Glad"] = "Horizon/vendor/Glad/include"
 IncludeDir["GLFW"] = "Horizon/vendor/GLFW/include"
 
 include "Horizon/vendor/GLFW"
+include "Horizon/vendor/Glad"
 
 project "Horizon"
 	location "Horizon"
@@ -40,12 +42,14 @@ project "Horizon"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links 
 	{ 
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -57,7 +61,8 @@ project "Horizon"
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
-			"HZ_BUILD_DLL"
+			"HZ_BUILD_DLL",
+			"GLFW_INCLUDE_HOME"
 		}
 
 		postbuildcommands
