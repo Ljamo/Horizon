@@ -75,7 +75,7 @@ namespace Horizon {
 		data.EventCallback(event);
 			});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+			glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -99,8 +99,16 @@ namespace Horizon {
 			data.EventCallback(event);
 			break;
 		}
-		}
+	}
+});
+
+			glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int KeyCode)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				KeyTypedEvent event(KeyCode);
+				data.EventCallback(event);
 			});
+
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
