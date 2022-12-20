@@ -27,6 +27,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());	
+		PushOverlay(new Horizon::ImGuiLayer());
 	}
 
 	~Sandbox()
