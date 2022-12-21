@@ -68,12 +68,11 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="Input.h">
-      <Filter>Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowsInput.h">
-      <Filter>Platform\Windows</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Horizon\KeyCodes.h" />
+    <ClInclude Include="src\Horizon\MouseButtonCodes.h" />
+    <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Horizon\Input.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Application.cpp">
@@ -98,8 +97,6 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="WindowsInput.cpp">
-      <Filter>Platform\Windows</Filter>
-    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

@@ -149,7 +149,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Input.h" />
     <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Application.h" />
     <ClInclude Include="src\Horizon\Core.h" />
@@ -159,15 +158,19 @@
     <ClInclude Include="src\Horizon\Events\KeyEvent.h" />
     <ClInclude Include="src\Horizon\Events\MouseEvent.h" />
     <ClInclude Include="src\Horizon\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Horizon\Input.h" />
+    <ClInclude Include="src\Horizon\KeyCodes.h" />
     <ClInclude Include="src\Horizon\Layer.h" />
     <ClInclude Include="src\Horizon\LayerStack.h" />
     <ClInclude Include="src\Horizon\Log.h" />
+    <ClInclude Include="src\Horizon\MouseButtonCodes.h" />
     <ClInclude Include="src\Horizon\Window.h" />
+    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="WindowsInput.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Application.cpp" />
@@ -180,7 +183,7 @@
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WindowsInput.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

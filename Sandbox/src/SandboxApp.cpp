@@ -11,13 +11,19 @@ public:
 
 	void OnUpdate() override
 	{
-		HZ_INFO("ExampleLayer::Update");
+		if (Horizon::Input::IsKeyPressed(HZ_KEY_TAB))
+			HZ_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(Horizon::Event& event) override
 	{
-		HZ_TRACE("{0}", event);
-
+		if (event.GetEventType() == Horizon::EventType::KeyPressed)
+		{
+			Horizon::KeyPressedEvent& e = (Horizon::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == HZ_KEY_TAB)
+				HZ_TRACE("Tab key is pressed (event)!");
+			HZ_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 

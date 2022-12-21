@@ -6,6 +6,11 @@
 #include "Horizon/Layer.h"
 #include "Horizon/Log.h"
 
+#include "Horizon/Input.h"
+#include "Horizon/KeyCodes.h"
+#include "Horizon/MouseButtonCodes.h"
+
+
 #include "Horizon/ImGui/ImGuiLayer.h"
 
 // --Entry Point-----------------------
