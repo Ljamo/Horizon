@@ -1,4 +1,4 @@
-#include <Horizon.h>
+#include <Horizon.h>		
 
 class ExampleLayer : public Horizon::Layer
 {
