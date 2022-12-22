@@ -5,7 +5,7 @@
 
 #include <glad/glad.h>
 
-#include "Horizon/Input.h"
+#include "Input.h"
 
 namespace Horizon {
 
