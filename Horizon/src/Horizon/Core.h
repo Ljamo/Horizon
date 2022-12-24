@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef HZ_PLATFORM_WINDOWS
+#if HZ_DYNAMIC_LINK
 	#ifdef HZ_BUILD_DLL
 		#define HORIZON_API __declspec(dllexport)
 	#else
 		#define HORIZON_API __declspec(dllimport)
 	#endif //
+#else
+#define HORIZON_API
+#endif
 #else
 	#error Horizon only supports Windows!
 #endif // 

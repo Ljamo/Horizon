@@ -1,6 +1,8 @@
 project "Glad"
     kind "StaticLib"
     language "C"
+    cppdialect "C++17"
+    staticruntime "On"
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -16,10 +18,15 @@ project "Glad"
 	{
 		"include"
 	}
-    
+
     filter "system:windows"
-        systemversion "latest"
-        staticruntime "On"
+       systemversion "latest"
         
     filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"
+    buildoptions "/MT"
+    runtime "Release"
+    symbols "on"
+
+    filter {"system:windows", "configurations:Debug"}
+        runtime "Debug"
+        symbols "on"
