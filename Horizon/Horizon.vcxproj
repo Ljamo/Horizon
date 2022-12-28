@@ -155,7 +155,10 @@
     <ClInclude Include="src\Horizon\LayerStack.h" />
     <ClInclude Include="src\Horizon\Log.h" />
     <ClInclude Include="src\Horizon\MouseButtonCodes.h" />
+    <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Horizon\Renderer\Shader.h" />
     <ClInclude Include="src\Horizon\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\hzpch.h" />
@@ -583,6 +586,8 @@
     <ClCompile Include="src\Horizon\Layer.cpp" />
     <ClCompile Include="src\Horizon\LayerStack.cpp" />
     <ClCompile Include="src\Horizon\Log.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\hzpch.cpp">
