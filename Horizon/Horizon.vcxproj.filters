@@ -93,11 +93,26 @@
     <ClInclude Include="src\Horizon\MouseButtonCodes.h">
       <Filter>src\Horizon</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\Buffer.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\Renderer.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\Shader.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\VertexArray.h">
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Window.h">
       <Filter>src\Horizon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1359,7 +1374,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Renderer\Shader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Application.cpp">
@@ -1380,6 +1395,18 @@
     <ClCompile Include="src\Horizon\Log.cpp">
       <Filter>src\Horizon</Filter>
     </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\Buffer.cpp">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\Renderer.cpp">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\Shader.cpp">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1392,6 +1419,7 @@
     <ClCompile Include="src\hzpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Horizon\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
 </Project>
