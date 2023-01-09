@@ -13,6 +13,8 @@
 #include "Horizon/Renderer/Buffer.h"
 #include "Horizon/Renderer/VertexArray.h"
 
+#include "Renderer/OrthographicCamera.h"
+
 namespace Horizon {
 
 	class HORIZON_API Application
@@ -44,6 +46,8 @@ namespace Horizon {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};
