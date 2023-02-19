@@ -143,6 +143,7 @@
     <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Application.h" />
     <ClInclude Include="src\Horizon\Core.h" />
+    <ClInclude Include="src\Horizon\Core\Timestep.h" />
     <ClInclude Include="src\Horizon\EntryPoint.h" />
     <ClInclude Include="src\Horizon\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Horizon\Events\Event.h" />

@@ -3,6 +3,8 @@
 #include "Horizon/Core.h"
 #include "Horizon/Events/Event.h"
 
+#include "Horizon/Core/Timestep.h"
+
 namespace Horizon {
 
 	class HORIZON_API Layer
@@ -13,7 +15,7 @@ namespace Horizon {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

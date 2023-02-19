@@ -7,13 +7,9 @@
 #include "Horizon/Events/Event.h"
 #include "Horizon/Events/ApplicationEvent.h"
 
+#include "Horizon/Core/Timestep.h"
+
 #include "Horizon/ImGui/ImGuiLayer.h"
-
-#include "Horizon/Renderer/Shader.h"
-#include "Horizon/Renderer/Buffer.h"
-#include "Horizon/Renderer/VertexArray.h"
-
-#include "Renderer/OrthographicCamera.h"
 
 namespace Horizon {
 
@@ -35,19 +31,12 @@ namespace Horizon {
 		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
 	};
