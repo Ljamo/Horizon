@@ -21,27 +21,14 @@ namespace Horizon {
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		HZ_CORE_ASSERT(status, "Failed to initialize Glad!");
 
-		// TODO: Fix Errors
-		//HZ_CORE_INFO("OpenGL Info:");
-		//printf("  OEM ID: %u\n", siSysInfo.dwOemId);
-		//HZ_CORE_INFO("  OEM ID: %u\n", siSysInfo.dwOemId));
-		//HZ_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
-		//HZ_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
+		const char* version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
+		const char* renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+		const char* vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
+		HZ_CORE_INFO("OpenGL Info:");
+		HZ_CORE_ERROR("  Vendor:     {0}", vendor);
+		HZ_CORE_ERROR("  Renderer:   {0}", renderer);
+		HZ_CORE_ERROR("  OpenGL      {0}", version);
 
-		//GetSystemInfo(&siSysInfo);
-		//
-		//printf("Hardware information: \n");
-		//printf("  OEM ID: %u\n", siSysInfo.dwOemId);
-		//printf("  Number of processors: %u\n",
-		//	siSysInfo.dwNumberOfProcessors);
-		//printf("  Page size: %u\n", siSysInfo.dwPageSize);
-		//printf("  Processor type: %u\n", siSysInfo.dwProcessorType);
-		//printf("  Minimum application address: %lx\n",
-		//	siSysInfo.lpMinimumApplicationAddress);
-		//printf("  Maximum application address: %lx\n",
-		//	siSysInfo.lpMaximumApplicationAddress);
-		//printf("  Active processor mask: %u\n",
-		//	siSysInfo.dwActiveProcessorMask);
 
 	}
 
