@@ -21,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Horizon::VertexBuffer> vertexBuffer;
+		Horizon::Ref<Horizon::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Horizon::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Horizon::BufferLayout layout = {
 			{ Horizon::ShaderDataType::Float3, "a_Position" },
@@ -31,7 +31,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Horizon::IndexBuffer> indexBuffer;
+		Horizon::Ref<Horizon::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Horizon::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -44,7 +44,7 @@ public:
 			-0.5f,  0.5f, 0.0f
 		};
 
-		std::shared_ptr<Horizon::VertexBuffer> squareVB;
+		Horizon::Ref<Horizon::VertexBuffer> squareVB;
 		squareVB.reset(Horizon::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{ Horizon::ShaderDataType::Float3, "a_Position" }
@@ -52,7 +52,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Horizon::IndexBuffer> squareIB;
+		Horizon::Ref<Horizon::IndexBuffer> squareIB;
 		squareIB.reset(Horizon::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -198,11 +198,11 @@ public:
 	{
 	}
 private:
-	std::shared_ptr<Horizon::Shader> m_Shader;
-	std::shared_ptr<Horizon::VertexArray> m_VertexArray;
+	Horizon::Ref<Horizon::Shader> m_Shader;
+	Horizon::Ref<Horizon::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Horizon::Shader> m_FlatColorShader;
-	std::shared_ptr<Horizon::VertexArray> m_SquareVA;
+	Horizon::Ref<Horizon::Shader> m_FlatColorShader;
+	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
 
 	Horizon::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
