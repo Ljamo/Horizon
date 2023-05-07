@@ -37,17 +37,18 @@ public:
 
 		m_SquareVA.reset(Horizon::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		Horizon::Ref<Horizon::VertexBuffer> squareVB;
 		squareVB.reset(Horizon::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ Horizon::ShaderDataType::Float3, "a_Position" }
+			{ Horizon::ShaderDataType::Float3, "a_Position" },
+			{ Horizon::ShaderDataType::Float2, "a_TextCoord" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -126,21 +127,61 @@ public:
 		)";
 
 		m_FlatColorShader.reset(Horizon::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Horizon::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Horizon::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<Horizon::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Horizon::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Horizon::Timestep ts) override
 	{
 
-		if (Horizon::Input::IsKeyPressed (HZ_KEY_A))
+		if (Horizon::Input::IsKeyPressed(HZ_KEY_A))
 			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 
-		else if (Horizon::Input::IsKeyPressed (HZ_KEY_D))
+		else if (Horizon::Input::IsKeyPressed(HZ_KEY_D))
 			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 
-		if (Horizon::Input::IsKeyPressed (HZ_KEY_W))
+		if (Horizon::Input::IsKeyPressed(HZ_KEY_W))
 			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 
-		else if (Horizon::Input::IsKeyPressed (HZ_KEY_S))
+		else if (Horizon::Input::IsKeyPressed(HZ_KEY_S))
 			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 
 		//
@@ -182,7 +223,10 @@ public:
 			}
 		}
 
-		Horizon::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		Horizon::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		// Triangle
+		//	Horizon::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Horizon::Renderer::EndScene();
 	}
@@ -201,8 +245,10 @@ private:
 	Horizon::Ref<Horizon::Shader> m_Shader;
 	Horizon::Ref<Horizon::VertexArray> m_VertexArray;
 
-	Horizon::Ref<Horizon::Shader> m_FlatColorShader;
+	Horizon::Ref<Horizon::Shader> m_FlatColorShader, m_TextureShader;
 	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
+
+	Horizon::Ref<Horizon::Texture2D> m_Texture;
 
 	Horizon::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;

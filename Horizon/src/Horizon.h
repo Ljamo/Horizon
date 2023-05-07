@@ -15,13 +15,17 @@
 
 #include "Horizon/ImGui/ImGuiLayer.h"
 
+// --Renderer-------------------------
+
 #include "Horizon/Renderer/Renderer.h"
 #include "Horizon/Renderer/RenderCommand.h"
+
 #include "Horizon/Renderer/Buffer.h"
 #include "Horizon/Renderer/Shader.h"
+#include "Horizon/Renderer/Texture.h"
 #include "Horizon/Renderer/VertexArray.h"
-#include "Horizon/Renderer/OrthographicCamera.h"
 
+#include "Horizon/Renderer/OrthographicCamera.h"
 // --Entry Point-----------------------
 #include "Horizon/EntryPoint.h"
 // ------------------------------------
