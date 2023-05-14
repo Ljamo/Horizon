@@ -4,8 +4,12 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Horizon/Core/Timer.h"
+
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/glm/gtc/type_ptr.hpp>
+
+using namespace Dawn;
 
 class ExampleLayer : public Horizon::Layer
 {
@@ -128,40 +132,7 @@ public:
 
 		m_FlatColorShader.reset(Horizon::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
-		std::string textureShaderVertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		std::string textureShaderFragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;
-
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
-		m_TextureShader.reset(Horizon::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		m_TextureShader.reset(Horizon::Shader::Create("assets/shaders/Texture.glsl"));
 
 		m_Texture = Horizon::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_TransparentTestTexture = Horizon::Texture2D::Create("assets/textures/BlendTest.png");
@@ -229,7 +200,7 @@ public:
 		m_TransparentTestTexture->Bind();
 		Horizon::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		// Triangle
-		//	Horizon::Renderer::Submit(m_Shader, m_VertexArray);
+		//Horizon::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Horizon::Renderer::EndScene();
 	}
