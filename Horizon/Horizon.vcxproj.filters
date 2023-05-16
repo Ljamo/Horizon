@@ -63,6 +63,9 @@
     <ClInclude Include="src\Horizon\Core.h">
       <Filter>src\Horizon</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Core\Timer.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Core\Timestep.h">
       <Filter>src\Horizon\Core</Filter>
     </ClInclude>
@@ -1410,7 +1413,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Core\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Application.cpp">

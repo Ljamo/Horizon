@@ -96,7 +96,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Horizon::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Horizon::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
@@ -130,15 +130,15 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Horizon::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = Horizon::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-		m_TextureShader.reset(Horizon::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = Horizon::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_TransparentTestTexture = Horizon::Texture2D::Create("assets/textures/BlendTest.png");
 
-		std::dynamic_pointer_cast<Horizon::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Horizon::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Horizon::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Horizon::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Horizon::Timestep ts) override
@@ -195,10 +195,12 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Horizon::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Horizon::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_TransparentTestTexture->Bind();
-		Horizon::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Horizon::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		// Triangle
 		//Horizon::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -216,10 +218,11 @@ public:
 	{
 	}
 private:
+	Horizon::ShaderLibrary m_ShaderLibrary;
 	Horizon::Ref<Horizon::Shader> m_Shader;
 	Horizon::Ref<Horizon::VertexArray> m_VertexArray;
 
-	Horizon::Ref<Horizon::Shader> m_FlatColorShader, m_TextureShader;
+	Horizon::Ref<Horizon::Shader> m_FlatColorShader;
 	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
 
 	Horizon::Ref<Horizon::Texture2D> m_Texture, m_TransparentTestTexture;
