@@ -157,6 +157,7 @@
     <ClInclude Include="src\Horizon\LayerStack.h" />
     <ClInclude Include="src\Horizon\Log.h" />
     <ClInclude Include="src\Horizon\MouseButtonCodes.h" />
+    <ClInclude Include="src\Horizon\OrthographicCameraController.h" />
     <ClInclude Include="src\Horizon\Renderer\Buffer.h" />
     <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Horizon\Renderer\OrthographicCamera.h" />
@@ -601,6 +602,7 @@
     <ClCompile Include="src\Horizon\Layer.cpp" />
     <ClCompile Include="src\Horizon\LayerStack.cpp" />
     <ClCompile Include="src\Horizon\Log.cpp" />
+    <ClCompile Include="src\Horizon\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Horizon\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Horizon\Renderer\RenderCommand.cpp" />

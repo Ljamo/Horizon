@@ -11,6 +11,7 @@
 #include "Horizon/Input.h"
 #include "Horizon/KeyCodes.h"
 #include "Horizon/MouseButtonCodes.h"
+#include "Horizon/OrthographicCameraController.h"
 
 
 #include "Horizon/ImGui/ImGuiLayer.h"
