@@ -4,10 +4,10 @@
 
 [submodule "Horizon/vendor/GLFW"]
 	path = Horizon/vendor/GLFW
-	url = https://github.com/TheCherno/GLFW
+	url = https://github.com/Ljamo/glfw
 [submodule "Horizon/vendor/imgui"]
 	path = Horizon/vendor/imgui
-	url = https://github.com/TheCherno/imgui
+	url = https://github.com/Ljamo/imgui
 [submodule "Horizon/vendor/glm"]
 	path = Horizon/vendor/glm
 	url = https://github.com/g-truc/glm
