@@ -2,12 +2,12 @@
 	path = Horizon/vendor/spdlog
 	url = https://github.com/gabime/spdlog
 
-[submodule "Horizon/vendor/GLFW"]
-	path = Horizon/vendor/GLFW
-	url = https://github.com/TheCherno/GLFW
-[submodule "Horizon/vendor/imgui"]
-	path = Horizon/vendor/imgui
-	url = https://github.com/TheCherno/imgui
+#[submodule "Horizon/vendor/GLFW"]
+#	path = Horizon/vendor/GLFW
+#	url = https://github.com/TheCherno/GLFW
+#[submodule "Horizon/vendor/imgui"]
+#	path = Horizon/vendor/imgui
+#	url = https://github.com/TheCherno/imgui
 [submodule "Horizon/vendor/glm"]
 	path = Horizon/vendor/glm
 	url = https://github.com/g-truc/glm
