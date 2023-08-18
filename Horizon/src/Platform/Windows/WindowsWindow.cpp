@@ -67,6 +67,7 @@ namespace Horizon {
 		data.Height = height;
 
 		WindowResizeEvent event(width, height);
+		HZ_CORE_WARN("{0}, {1}", width, height);
 		data.EventCallback(event);
 			});
 
