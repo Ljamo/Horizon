@@ -61,50 +61,51 @@ namespace Horizon {
 
 		// Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
-			{
+		{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-		data.Width = width;
-		data.Height = height;
+				data.Width = width;
+				data.Height = height;
 
-		WindowResizeEvent event(width, height);
-		data.EventCallback(event);
-			});
+				WindowResizeEvent event(width, height);
+				//HZ_CORE_WARN("{0}, {1}", width, height);
+				data.EventCallback(event);
+		});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
-			{
+		{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-		WindowCloseEvent event;
-		data.EventCallback(event);
-			});
+				WindowCloseEvent event;
+				data.EventCallback(event);
+		});
 
-			glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			switch (action)
 			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			case GLFW_PRESS:
+			{
+				KeyPressedEvent event(key, 0);
+				data.EventCallback(event);
+				break;
+			}
+			case GLFW_RELEASE:
+			{
+				KeyReleasedEvent event(key);
+				data.EventCallback(event);
+				break;
+			}
+			case GLFW_REPEAT:
+			{
+				KeyPressedEvent event(key, 1);
+				data.EventCallback(event);
+				break;
+			}
+		}
+	});
 
-		switch (action)
-		{
-		case GLFW_PRESS:
-		{
-			KeyPressedEvent event(key, 0);
-			data.EventCallback(event);
-			break;
-		}
-		case GLFW_RELEASE:
-		{
-			KeyReleasedEvent event(key);
-			data.EventCallback(event);
-			break;
-		}
-		case GLFW_REPEAT:
-		{
-			KeyPressedEvent event(key, 1);
-			data.EventCallback(event);
-			break;
-		}
-	}
-});
-
-			glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int KeyCode)
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int KeyCode)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				KeyTypedEvent event(KeyCode);

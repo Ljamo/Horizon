@@ -196,6 +196,15 @@ public:
 	void OnEvent(Horizon::Event& e) override
 	{
 		m_CameraController.OnEvent(e);
+
+		if (e.GetEventType() == Horizon::EventType::WindowResize)
+		{
+			auto& re = (Horizon::WindowResizeEvent&)e;
+
+			//Already calculated
+			// float zoom = (float)re.GetWidth() / 1280.0f;
+			// m_CameraController.SetZoomLevel(zoom);
+		}
 	}
 
 private:

@@ -47,7 +47,7 @@ namespace Horizon {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(HZ_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
-		dispatcher.Dispatch<WindowResizeEvent>(HZ_BIND_EVENT_FN(OrthographicCameraController::OnWindowResize));
+		dispatcher.Dispatch<WindowResizeEvent>(HZ_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
@@ -59,9 +59,9 @@ namespace Horizon {
 		return false;
 	}
 
-	bool OrthographicCameraController::OnWindowResize(WindowResizeEvent& e)
+	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
-		m_ZoomLevel -= (float)e.GetWidth() / (float)e.GetHeight();
+		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;
 
