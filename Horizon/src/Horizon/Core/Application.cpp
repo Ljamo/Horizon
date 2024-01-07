@@ -1,7 +1,7 @@
 #include "hzpch.h"
 #include "Application.h"
 
-#include "Horizon/Log.h"
+#include "Horizon/Core/Log.h"
 
 #include "Horizon/Renderer/Renderer.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Horizon/Layer.h"
+#include "Horizon/Core/Layer.h"
 
 #include "Horizon/Events/ApplicationEvent.h"
 #include "Horizon/Events/KeyEvent.h"

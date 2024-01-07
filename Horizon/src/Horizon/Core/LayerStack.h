@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Horizon/Core.h"
+#include "Horizon/Core/Core.h"
 #include "Layer.h"
 
 #include <vector>

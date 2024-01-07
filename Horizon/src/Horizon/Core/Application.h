@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include "Window.h"
-#include "Horizon/LayerStack.h"
+#include "Horizon/Core/LayerStack.h"
 #include "Horizon/Events/Event.h"
 #include "Horizon/Events/ApplicationEvent.h"
 

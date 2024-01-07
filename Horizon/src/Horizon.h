@@ -2,16 +2,16 @@
 
 // For use by Horizon Applications
 
-#include "Horizon/Application.h"
-#include "Horizon/Layer.h"
-#include "Horizon/Log.h"
+#include "Horizon/Core/Application.h"
+#include "Horizon/Core/Layer.h"
+#include "Horizon/Core/Log.h"
 
 #include "Horizon/Core/Timestep.h"
 
-#include "Horizon/Input.h"
-#include "Horizon/KeyCodes.h"
-#include "Horizon/MouseButtonCodes.h"
-#include "Horizon/OrthographicCameraController.h"
+#include "Horizon/Core/Input.h"
+#include "Horizon/Core/KeyCodes.h"
+#include "Horizon/Core/MouseButtonCodes.h"
+#include "Horizon/Renderer/OrthographicCameraController.h"
 
 
 #include "Horizon/ImGui/ImGuiLayer.h"
@@ -28,5 +28,5 @@
 
 #include "Horizon/Renderer/OrthographicCamera.h"
 // --Entry Point-----------------------
-#include "Horizon/EntryPoint.h"
+#include "Horizon/Core/EntryPoint.h"
 // ------------------------------------

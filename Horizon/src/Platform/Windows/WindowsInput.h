@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Horizon/Input.h"
+#include "Horizon/Core/Input.h"
 
 namespace Horizon {
 

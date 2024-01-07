@@ -57,11 +57,32 @@
     <ClInclude Include="src\Horizon.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Application.h">
-      <Filter>src\Horizon</Filter>
+    <ClInclude Include="src\Horizon\Core\Application.h">
+      <Filter>src\Horizon\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Core.h">
-      <Filter>src\Horizon</Filter>
+    <ClInclude Include="src\Horizon\Core\Core.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\EntryPoint.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\Input.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\KeyCodes.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\Layer.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\LayerStack.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\Log.h">
+      <Filter>src\Horizon\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Core\MouseButtonCodes.h">
+      <Filter>src\Horizon\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Core\Timer.h">
       <Filter>src\Horizon\Core</Filter>
@@ -69,8 +90,8 @@
     <ClInclude Include="src\Horizon\Core\Timestep.h">
       <Filter>src\Horizon\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\EntryPoint.h">
-      <Filter>src\Horizon</Filter>
+    <ClInclude Include="src\Horizon\Core\Window.h">
+      <Filter>src\Horizon\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Events\ApplicationEvent.h">
       <Filter>src\Horizon\Events</Filter>
@@ -87,27 +108,6 @@
     <ClInclude Include="src\Horizon\ImGui\ImGuiLayer.h">
       <Filter>src\Horizon\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Input.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\KeyCodes.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\Layer.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\LayerStack.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\Log.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\MouseButtonCodes.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\OrthographicCameraController.h">
-      <Filter>src\Horizon</Filter>
-    </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\Buffer.h">
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
@@ -115,6 +115,9 @@
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\OrthographicCamera.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\OrthographicCameraController.h">
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\RenderCommand.h">
@@ -134,9 +137,6 @@
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\VertexArray.h">
       <Filter>src\Horizon\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Horizon\Window.h">
-      <Filter>src\Horizon</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1418,8 +1418,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Horizon\Application.cpp">
-      <Filter>src\Horizon</Filter>
+    <ClCompile Include="src\Horizon\Core\Application.cpp">
+      <Filter>src\Horizon\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Core\Layer.cpp">
+      <Filter>src\Horizon\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Core\LayerStack.cpp">
+      <Filter>src\Horizon\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Core\Log.cpp">
+      <Filter>src\Horizon\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\ImGui\ImGuiBuild.cpp">
       <Filter>src\Horizon\ImGui</Filter>
@@ -1427,22 +1436,13 @@
     <ClCompile Include="src\Horizon\ImGui\ImGuiLayer.cpp">
       <Filter>src\Horizon\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Horizon\Layer.cpp">
-      <Filter>src\Horizon</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Horizon\LayerStack.cpp">
-      <Filter>src\Horizon</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Horizon\Log.cpp">
-      <Filter>src\Horizon</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Horizon\OrthographicCameraController.cpp">
-      <Filter>src\Horizon</Filter>
-    </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp">
       <Filter>src\Horizon\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\OrthographicCameraController.cpp">
       <Filter>src\Horizon\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\RenderCommand.cpp">

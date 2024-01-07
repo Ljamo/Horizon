@@ -141,33 +141,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Horizon.h" />
-    <ClInclude Include="src\Horizon\Application.h" />
-    <ClInclude Include="src\Horizon\Core.h" />
+    <ClInclude Include="src\Horizon\Core\Application.h" />
+    <ClInclude Include="src\Horizon\Core\Core.h" />
+    <ClInclude Include="src\Horizon\Core\EntryPoint.h" />
+    <ClInclude Include="src\Horizon\Core\Input.h" />
+    <ClInclude Include="src\Horizon\Core\KeyCodes.h" />
+    <ClInclude Include="src\Horizon\Core\Layer.h" />
+    <ClInclude Include="src\Horizon\Core\LayerStack.h" />
+    <ClInclude Include="src\Horizon\Core\Log.h" />
+    <ClInclude Include="src\Horizon\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Horizon\Core\Timer.h" />
     <ClInclude Include="src\Horizon\Core\Timestep.h" />
-    <ClInclude Include="src\Horizon\EntryPoint.h" />
+    <ClInclude Include="src\Horizon\Core\Window.h" />
     <ClInclude Include="src\Horizon\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Horizon\Events\Event.h" />
     <ClInclude Include="src\Horizon\Events\KeyEvent.h" />
     <ClInclude Include="src\Horizon\Events\MouseEvent.h" />
     <ClInclude Include="src\Horizon\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Horizon\Input.h" />
-    <ClInclude Include="src\Horizon\KeyCodes.h" />
-    <ClInclude Include="src\Horizon\Layer.h" />
-    <ClInclude Include="src\Horizon\LayerStack.h" />
-    <ClInclude Include="src\Horizon\Log.h" />
-    <ClInclude Include="src\Horizon\MouseButtonCodes.h" />
-    <ClInclude Include="src\Horizon\OrthographicCameraController.h" />
     <ClInclude Include="src\Horizon\Renderer\Buffer.h" />
     <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Horizon\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Horizon\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Horizon\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Horizon\Renderer\Renderer.h" />
     <ClInclude Include="src\Horizon\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Horizon\Renderer\Shader.h" />
     <ClInclude Include="src\Horizon\Renderer\Texture.h" />
     <ClInclude Include="src\Horizon\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Horizon\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -596,15 +596,15 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Horizon\Application.cpp" />
+    <ClCompile Include="src\Horizon\Core\Application.cpp" />
+    <ClCompile Include="src\Horizon\Core\Layer.cpp" />
+    <ClCompile Include="src\Horizon\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Horizon\Core\Log.cpp" />
     <ClCompile Include="src\Horizon\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Horizon\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Horizon\Layer.cpp" />
-    <ClCompile Include="src\Horizon\LayerStack.cpp" />
-    <ClCompile Include="src\Horizon\Log.cpp" />
-    <ClCompile Include="src\Horizon\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Horizon\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Horizon\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Horizon\Renderer\RendererAPI.cpp" />

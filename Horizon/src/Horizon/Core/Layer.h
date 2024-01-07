@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Horizon/Core.h"
+#include "Horizon/Core/Core.h"
 #include "Horizon/Events/Event.h"
 
 #include "Horizon/Core/Timestep.h"

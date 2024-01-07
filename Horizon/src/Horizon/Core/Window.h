@@ -2,7 +2,7 @@
 
 #include "hzpch.h"
 
-#include "Horizon/Core.h"
+#include "Horizon/Core/Core.h"
 #include "Horizon/Events/Event.h"
 
 namespace Horizon {

@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Horizon/Log.h"
+#include "Horizon/Core/Log.h"
 
 #ifdef HZ_PLATFORM_WINDOWS
 	#include <Windows.h>

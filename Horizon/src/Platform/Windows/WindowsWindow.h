@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Horizon/Window.h"
+#include "Horizon/Core/Window.h"
 #include "Horizon/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

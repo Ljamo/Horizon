@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Renderer/OrthographicCamera.h"
-#include "Core/Timestep.h"
+#include "OrthographicCamera.h"
+#include "Horizon/Core/Timestep.h"
 
 #include "Horizon/Events/ApplicationEvent.h"
 #include "Horizon/Events/MouseEvent.h"

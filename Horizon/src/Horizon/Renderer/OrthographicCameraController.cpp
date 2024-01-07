@@ -1,8 +1,8 @@
 #include "hzpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Horizon/input.h"
-#include "Horizon/KeyCodes.h"
+#include "Horizon/Core/input.h"
+#include "Horizon/Core/KeyCodes.h"
 
 namespace Horizon {
 

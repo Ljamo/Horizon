@@ -1,7 +1,7 @@
 #include "hzpch.h"
 #include "WindowsInput.h"
 
-#include "Horizon/Application.h"
+#include "Horizon/Core/Application.h"
 #include <GlFW/glfw3.h>
 
 namespace Horizon {
