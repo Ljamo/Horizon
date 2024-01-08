@@ -27,6 +27,6 @@
 #include "Horizon/Renderer/VertexArray.h"
 
 #include "Horizon/Renderer/OrthographicCamera.h"
+
 // --Entry Point-----------------------
-#include "Horizon/Core/EntryPoint.h"
 // ------------------------------------
