@@ -1416,6 +1416,9 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\2D\Renderer2D.h" />
+    <ClInclude Include="src\Horizon\Renderer\PerspectiveCamera.h" />
+    <ClInclude Include="src\Horizon\Renderer\3D\Renderer3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Core\Application.cpp">
@@ -1493,5 +1496,8 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\2D\Renderer2D.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\3D\Renderer3D.cpp" />
   </ItemGroup>
 </Project>

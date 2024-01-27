@@ -1,4 +1,4 @@
-#include "Sandbox2D.h"
+#include "2D/Sandbox2D.h"
 #include "Horizon/Core/EntryPoint.h"
 
 #include "imgui/imgui.h"

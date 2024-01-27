@@ -19,6 +19,8 @@
 // --Renderer-------------------------
 
 #include "Horizon/Renderer/Renderer.h"
+#include "Horizon/Renderer/2D/Renderer2D.h"
+#include "Horizon/Renderer/3D/Renderer3D.h"
 #include "Horizon/Renderer/RenderCommand.h"
 
 #include "Horizon/Renderer/Buffer.h"
