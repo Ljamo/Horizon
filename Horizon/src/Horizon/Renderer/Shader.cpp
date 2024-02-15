@@ -67,4 +67,19 @@ namespace Horizon {
 		return m_Shaders.find(name) != m_Shaders.end();
 	}
 
+	// void SetMat4(const glm::vec4& value)
+	// {
+	// 
+	// }
+	// 
+	// void SetFloat3(const glm::vec4& value)
+	// {
+	// 
+	// }
+	// 	
+	// void SetFloat4(const glm::mat4 & value)
+	// {
+	// 
+	// }
+
 }

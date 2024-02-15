@@ -144,6 +144,10 @@
       <Project>{6EE457B5-DAC3-D650-E3DB-61274F3A3DB2}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\FlatColor.glsl" />
+    <None Include="assets\shaders\Texture.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
