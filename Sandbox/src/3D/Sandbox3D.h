@@ -16,6 +16,8 @@ public:
 	void OnEvent(Horizon::Event& e) override;
 private:
 	Horizon::OrthographicCameraController m_CameraController;
+	// Will change to perspective camera controller later on
+
 
 	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
 	Horizon::Ref<Horizon::Shader> m_FlatColorShader;

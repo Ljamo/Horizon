@@ -20,5 +20,7 @@ private:
 	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
 	Horizon::Ref<Horizon::Shader> m_FlatColorShader;
 
+	Horizon::Ref<Horizon::Texture2D> m_CheckboardTexture;
+
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
