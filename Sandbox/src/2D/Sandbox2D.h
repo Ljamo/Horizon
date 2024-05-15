@@ -17,10 +17,11 @@ public:
 private:
 	Horizon::OrthographicCameraController m_CameraController;
 
+	// Temp
 	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
 	Horizon::Ref<Horizon::Shader> m_FlatColorShader;
 
-	Horizon::Ref<Horizon::Texture2D> m_CheckboardTexture;
+	Horizon::Ref<Horizon::Texture2D> m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
