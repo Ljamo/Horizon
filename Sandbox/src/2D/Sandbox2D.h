@@ -2,7 +2,6 @@
 
 #include "Horizon.h"
 
-
 class Sandbox2D : public Horizon::Layer
 {
 public:

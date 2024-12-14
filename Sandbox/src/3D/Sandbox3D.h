@@ -15,12 +15,19 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Horizon::Event& e) override;
 private:
-	Horizon::OrthographicCameraController m_CameraController;
-	// Will change to perspective camera controller later on
+	Horizon::PerspectiveCameraController m_CameraController;
 
-
-	Horizon::Ref<Horizon::VertexArray> m_SquareVA;
+	Horizon::Ref<Horizon::VertexArray> m_CubeVA;
 	Horizon::Ref<Horizon::Shader> m_FlatColorShader;
 
-	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+	struct ProfileResult
+	{
+		const char* Name;
+		float Time;
+	};
+
+	std::vector<ProfileResult> m_ProfileResults;
+
+
+	glm::vec4 m_CubeColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

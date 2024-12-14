@@ -1,7 +1,10 @@
 #pragma once
 
 #include "..\OrthographicCamera.h"
+#include "..\PerspectiveCamera.h"
 #include "hzpch.h"
+
+#include "../texture.h"
 
 namespace Horizon
 {
@@ -9,13 +12,14 @@ namespace Horizon
 	{
 	public:
 		static void Init();
-		static void ShutDown();
+		static void Shutdown();
 
 		static void BeginScene(const OrthographicCamera& camera);
+		static void BeginScene(const PerspectiveCamera& camera);
 		static void EndScene();
 
 		// Primitives
-		static void DrawQuad(const glm::vec3& position, glm::vec3& size, const glm::vec4& color);
-		static void DrawQuad(const glm::vec4& position, glm::vec3& size, const glm::vec4& color);
+		static void DrawCube(const glm::vec3& position, const glm::vec3& size, const glm::vec4& color);
+		static void DrawCube(const glm::vec3& position, const glm::vec3& size, const Ref<Texture2D>& texture);
 	};
 }

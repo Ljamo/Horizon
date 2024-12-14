@@ -1,4 +1,5 @@
 #include "2D/Sandbox2D.h"
+#include "3D/Sandbox3D.h"
 #include "Horizon/Core/EntryPoint.h"
 
 #include "imgui/imgui.h"
@@ -227,7 +228,7 @@ public:
 	Sandbox()
 	{
 		//PushLayer(new ExampleLayer());
-		PushLayer(new Sandbox2D());
+		PushLayer(new Sandbox3D());
 	}
 
 	~Sandbox()

@@ -12,12 +12,14 @@
 #include "Horizon/Core/KeyCodes.h"
 #include "Horizon/Core/MouseButtonCodes.h"
 #include "Horizon/Renderer/OrthographicCameraController.h"
+#include "Horizon/Renderer/PerspectiveCameraController.h"
 
 #include "Horizon/ImGui/ImGuiLayer.h"
 
 // ---Renderer------------------------
 #include "Horizon/Renderer/Renderer.h"
 #include "Horizon/Renderer/2D/Renderer2D.h"
+#include "Horizon/Renderer/3D/Renderer3D.h"
 #include "Horizon/Renderer/RenderCommand.h"
 
 #include "Horizon/Renderer/Buffer.h"
@@ -26,4 +28,5 @@
 #include "Horizon/Renderer/VertexArray.h"
 
 #include "Horizon/Renderer/OrthographicCamera.h"
+#include "Horizon/Renderer/PerspectiveCamera.h"
 // -----------------------------------

@@ -15,6 +15,7 @@
     <ClInclude Include="src\3D\Sandbox3D.h">
       <Filter>3D</Filter>
     </ClInclude>
+    <ClInclude Include="src\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\2D\Sandbox2D.cpp">
