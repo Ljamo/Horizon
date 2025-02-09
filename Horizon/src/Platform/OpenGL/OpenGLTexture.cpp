@@ -76,6 +76,8 @@ namespace Horizon {
 
 	void OpenGLTexture2D::Bind(uint32_t slot) const
 	{
-		glBindTextureUnit(slot, m_RendererID);
+		// glBindTextureUnit(slot, m_RendererID);
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, m_RendererID);
 	}
 }

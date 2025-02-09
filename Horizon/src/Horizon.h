@@ -1,6 +1,6 @@
 #pragma once
 
-// For use by Hazel applications
+// For use by Horizon applications
 
 #include "Horizon/Core/Application.h"
 #include "Horizon/Core/Layer.h"

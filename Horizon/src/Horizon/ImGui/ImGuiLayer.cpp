@@ -88,10 +88,11 @@ namespace Horizon {
 		}
 	}
 
-	void ImGuiLayer::OnImGuiRender()
-	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-	}
+	// void ImGuiLayer::OnImGuiRender()
+	// {
+	// 	static bool s_Show = true;
+	// 
+	// 	ImGui::ShowDemoWindow(&s_Show);
+	// }
 
 }

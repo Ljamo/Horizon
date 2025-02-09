@@ -7,47 +7,50 @@ namespace Horizon {
 	{
 	public:
 
-		// Modify for perspective
-		PerspectiveCamera(float fov, float aspectRatio, float nearPlane, float farPlane);
+		PerspectiveCamera(float fov, float aspectRatio, float nearPlane, float farPlane,
+			glm::vec3 pos = glm::vec3(0.0f),
+			glm::vec3 rotation = glm::vec3(0.0f),
+			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f));
 		void SetProjection(float fov, float aspectRatio, float nearPlane, float farPlane);
 
-		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); RecalculateProjectionMatrix(); }
+		const glm::vec3& GetPosition() const;
+		void SetPosition(const glm::vec3& position);
 
-		glm::vec3 GetRotation() const { return m_Rotation; }
-		void SetRotation(const glm::vec3& rotation) { m_Rotation = rotation; RecalculateViewMatrix(); RecalculateProjectionMatrix(); }
+		glm::vec3 GetRotation() const;
+		void SetRotation(const glm::vec3& rotation);
 
 		// Modify this for perspective
-		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+		const glm::mat4& GetProjectionMatrix() const;
+		const glm::mat4& GetViewMatrix() const;
+		const glm::mat4& GetViewProjectionMatrix() const;
 
-		glm::vec3 GetFront() const {
-			return glm::normalize(glm::vec3(-m_ViewMatrix[2]));
-		}
-		glm::vec3 GetRight() const {
-			return glm::normalize(glm::vec3(m_ViewMatrix[0]));
-		}
-		glm::vec3 GetUp() const {
-			return glm::normalize(glm::vec3(m_ViewMatrix[1]));
-		}
+		glm::vec3 GetFront() const;
+		glm::vec3 GetRight() const;
+		glm::vec3 GetUp() const;
+		glm::vec3 GetWorldUp() const;
 
 	private:
 		void RecalculateViewMatrix();
 		void RecalculateProjectionMatrix();
+		void UpdateDirectionVectors();
+
 	private:
+		glm::vec3 m_Position;
+		glm::vec3 m_Rotation;
+		glm::vec3 m_Front;
+		glm::vec3 m_Up;
+		glm::vec3 m_Right;
+		glm::vec3 m_WorldUp;
+
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ViewProjectionMatrix;
-
-		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
-		glm::vec3 m_Rotation = { 0.0f, 0.0f, 0.0f }; // Euler angles: pitch, yaw, roll
 
 		float m_FOV;
 		float m_AspectRatio;
 		float m_NearPlane;
 		float m_FarPlane;
-
 	};
 
 }

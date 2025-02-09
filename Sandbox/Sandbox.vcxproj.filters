@@ -16,6 +16,8 @@
       <Filter>3D</Filter>
     </ClInclude>
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\Resources\Random.h" />
+    <ClInclude Include="src\Resources\ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\2D\Sandbox2D.cpp">
@@ -25,5 +27,15 @@
       <Filter>3D</Filter>
     </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\Resources\Random.cpp" />
+    <ClCompile Include="src\Resources\ParticleSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\Tracer.glsl" />
+    <None Include="assets\shaders\Water.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\Downloads\OpenSans-Regular.ttf" />
+    <Font Include="assets\OpenSans-Regular.ttf" />
   </ItemGroup>
 </Project>

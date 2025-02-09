@@ -22,6 +22,7 @@ namespace Horizon {
 
 		m_Window = Scope<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		//m_Window->SetVSync(0);
 
 		Renderer::Init();
 
@@ -69,6 +70,7 @@ namespace Horizon {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
+			// Updates everything else if not minimised
 			if (!m_Minimized)
 			{
 				for (Layer* layer : m_LayerStack)
@@ -76,6 +78,7 @@ namespace Horizon {
 
 			}
 
+			// Updates imgui even if minimised
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();

@@ -140,6 +140,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Horizon\Renderer\Mesh\Model.h" />
+    <ClInclude Include="src\Horizon\Renderer\Mesh\Mesh.h" />
     <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Core\Application.h" />
     <ClInclude Include="src\Horizon\Core\Core.h" />
@@ -153,6 +155,7 @@
     <ClInclude Include="src\Horizon\Core\Timer.h" />
     <ClInclude Include="src\Horizon\Core\Timestep.h" />
     <ClInclude Include="src\Horizon\Core\Window.h" />
+    <ClInclude Include="src\Horizon\Debug\Instrumentor.h" />
     <ClInclude Include="src\Horizon\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Horizon\Events\Event.h" />
     <ClInclude Include="src\Horizon\Events\KeyEvent.h" />
@@ -600,6 +603,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Horizon\Renderer\Mesh\Model.cpp" />
     <ClCompile Include="src\Horizon\Core\Application.cpp" />
     <ClCompile Include="src\Horizon\Core\Layer.cpp" />
     <ClCompile Include="src\Horizon\Core\LayerStack.cpp" />
@@ -609,6 +613,7 @@
     <ClCompile Include="src\Horizon\Renderer\2D\Renderer2D.cpp" />
     <ClCompile Include="src\Horizon\Renderer\3D\Renderer3D.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Horizon\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Horizon\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Horizon\Renderer\PerspectiveCamera.cpp" />

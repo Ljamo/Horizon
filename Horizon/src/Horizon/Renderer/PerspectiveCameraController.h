@@ -14,7 +14,7 @@ namespace Horizon
 		PerspectiveCameraController(float aspectRatio, float fov = 45.0f, bool rotation = false);
 
 		// Updates the camera controller (movement, rotation)
-		void OnUpdate(Timestep ts);
+		virtual void OnUpdate(Timestep ts);
 
 		// Handles input events (mouse, window resize)
 		void OnEvent(Event& e);
@@ -24,9 +24,11 @@ namespace Horizon
 		PerspectiveCamera& GetCamera() { return m_Camera; }
 		const PerspectiveCamera& GetCamera() const { return m_Camera; }
 
+
+		// Don't use this. Just use the FOV, and position
 		// Getter/Setter for zoom level (if applicable)
-		float GetZoomLevel() const { return m_ZoomLevel; }
-		void SetZoomLevel(float level) { m_ZoomLevel = level; UpdateProjection(); }
+		// float GetZoomLevel() const { return m_ZoomLevel; }
+		//void SetZoomLevel(float level) { m_ZoomLevel = level; UpdateProjection(); }
 
 	private:
 		// Handles mouse scroll input for zoom
@@ -49,7 +51,7 @@ namespace Horizon
 		// Movement and rotation control
 		bool m_Rotation;                      // Whether rotation is enabled
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f }; // Camera's world position
-		glm::vec3 m_CameraRotation = { 0.0f, 0.0f, 0.0f }; // Yaw, pitch, roll rotation
+		glm::vec3 m_CameraRotation = { 0.0f, -90.0f, 0.0f }; // Yaw, pitch, roll rotation
 
 		// Movement and rotation speeds
 		float m_CameraTranslationSpeed = 5.0f; // Units per second

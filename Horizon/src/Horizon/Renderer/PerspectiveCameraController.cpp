@@ -7,7 +7,7 @@
 namespace Horizon {
 
 	PerspectiveCameraController::PerspectiveCameraController(float aspectRatio, float fov, bool rotation)
-		: m_AspectRatio(aspectRatio), m_FOV(fov), m_Camera(fov, aspectRatio, 0.1f, 100.0f), m_Rotation(rotation)
+		: m_AspectRatio(aspectRatio), m_FOV(fov), m_Camera(fov, aspectRatio, 0.1f, 100.0f, m_CameraPosition, m_CameraRotation), m_Rotation(rotation)
 	{
 		// HZ_CORE_INFO("m_Camera should be created");
 		m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 100.0f);
@@ -33,10 +33,10 @@ namespace Horizon {
 			m_CameraPosition += m_Camera.GetRight() * velocity;
 
 		// Up/Down movement
-		if (Input::IsKeyPressed(HZ_KEY_Q))
-			m_CameraPosition -= m_Camera.GetUp() * velocity;
-		if (Input::IsKeyPressed(HZ_KEY_E))
-			m_CameraPosition += m_Camera.GetUp() * velocity;
+		if (Input::IsKeyPressed(HZ_KEY_LEFT_SHIFT))
+			m_CameraPosition -= m_Camera.GetWorldUp() * velocity;
+		if (Input::IsKeyPressed(HZ_KEY_SPACE))
+			m_CameraPosition += m_Camera.GetWorldUp() * velocity;
 
 		if (m_Rotation)
 		{
@@ -44,9 +44,9 @@ namespace Horizon {
 
 			// Rotate camera using Up/Down/Left/Right keys
 			if (Input::IsKeyPressed(HZ_KEY_UP))
-				m_CameraRotation.x -= rotationSpeed; // Pitch
-			if (Input::IsKeyPressed(HZ_KEY_DOWN))
 				m_CameraRotation.x += rotationSpeed; // Pitch
+			if (Input::IsKeyPressed(HZ_KEY_DOWN))
+				m_CameraRotation.x -= rotationSpeed; // Pitch
 			if (Input::IsKeyPressed(HZ_KEY_LEFT))
 				m_CameraRotation.y -= rotationSpeed; // Yaw
 			if (Input::IsKeyPressed(HZ_KEY_RIGHT))
@@ -54,7 +54,10 @@ namespace Horizon {
 
 			// Clamp pitch to prevent flipping
 			m_CameraRotation.x = glm::clamp(m_CameraRotation.x, -89.0f, 89.0f);
+
 		}
+
+		
 
 		// Update camera with new position and rotation
 		m_Camera.SetPosition(m_CameraPosition);
@@ -70,9 +73,9 @@ namespace Horizon {
 
 	bool PerspectiveCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
-		m_FOV -= e.GetYOffset() * 1.0f; // Adjust sensitivity as needed
-		m_FOV = glm::clamp(m_FOV, 10.0f, 90.0f); // Clamp FOV between reasonable values
-		m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 100.0f);
+		// m_FOV -= e.GetYOffset() * 1.0f; // Adjust sensitivity as needed
+		// m_FOV = glm::clamp(m_FOV, 10.0f, 90.0f); // Clamp FOV between reasonable values
+		// m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 100.0f);
 		return false;
 	}
 

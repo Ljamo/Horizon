@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include "Horizon/Core/Log.h"
+#include "Horizon/Debug/Instrumentor.h"
 
 #ifdef HZ_PLATFORM_WINDOWS
 	#include <Windows.h>

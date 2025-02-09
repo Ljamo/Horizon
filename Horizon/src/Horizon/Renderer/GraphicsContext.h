@@ -4,7 +4,7 @@ namespace Horizon {
 
 	enum class GraphicsType
 	{
-		Dimension2 = 0, Dimension3 = 1
+		_2D = 0, _3D = 1
 	};
 
 	class GraphicsContext
