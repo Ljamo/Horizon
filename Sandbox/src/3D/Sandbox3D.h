@@ -2,6 +2,7 @@
 
 #include "Horizon.h"
 
+#ifdef test
 class Sandbox3D : public Horizon::Layer
 {
 public:
@@ -51,3 +52,4 @@ private:
 
 	glm::vec4 m_CubeColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
+#endif

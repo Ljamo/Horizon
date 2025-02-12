@@ -70,6 +70,6 @@ void ParticleSystem::OnRender()
 
 		float size = glm::lerp(particle.SizeEnd, particle.SizeBegin, life);
 		// TODO Implement rotation
-		Horizon::Renderer3D::DrawCube(particle.Position, glm::vec3(size), color);
+		// Horizon::Renderer3D::DrawCube(particle.Position, glm::vec3(size), color);
 	}
 }

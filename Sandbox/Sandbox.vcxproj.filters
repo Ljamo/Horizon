@@ -7,6 +7,9 @@
     <Filter Include="3D">
       <UniqueIdentifier>{1C715900-08FD-870B-71AB-880B5D56880B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{000BCD17-6C75-818E-B5B3-3234215D5FE3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\2D\Sandbox2D.h">
@@ -15,9 +18,13 @@
     <ClInclude Include="src\3D\Sandbox3D.h">
       <Filter>3D</Filter>
     </ClInclude>
+    <ClInclude Include="src\Resources\ParticleSystem.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Random.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
     <ClInclude Include="src\Timer.h" />
-    <ClInclude Include="src\Resources\Random.h" />
-    <ClInclude Include="src\Resources\ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\2D\Sandbox2D.cpp">
@@ -26,16 +33,12 @@
     <ClCompile Include="src\3D\Sandbox3D.cpp">
       <Filter>3D</Filter>
     </ClCompile>
+    <ClCompile Include="src\Resources\ParticleSystem.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Random.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
-    <ClCompile Include="src\Resources\Random.cpp" />
-    <ClCompile Include="src\Resources\ParticleSystem.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\Tracer.glsl" />
-    <None Include="assets\shaders\Water.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="..\..\..\Downloads\OpenSans-Regular.ttf" />
-    <Font Include="assets\OpenSans-Regular.ttf" />
   </ItemGroup>
 </Project>

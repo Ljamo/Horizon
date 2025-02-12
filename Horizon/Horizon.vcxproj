@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;HZ_PLATFORM_WINDOWS;HZ_BUILD_DLL;GLFW_INCLUDE_HOME;HZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;HZ_PLATFORM_WINDOWS;HZ_BUILD_DLL;GLFW_INCLUDE_HOME;HZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;HZ_PLATFORM_WINDOWS;HZ_BUILD_DLL;GLFW_INCLUDE_HOME;HZ_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -140,8 +140,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Horizon\Renderer\Mesh\Model.h" />
-    <ClInclude Include="src\Horizon\Renderer\Mesh\Mesh.h" />
     <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Core\Application.h" />
     <ClInclude Include="src\Horizon\Core\Core.h" />
@@ -165,6 +163,7 @@
     <ClInclude Include="src\Horizon\Renderer\3D\Renderer3D.h" />
     <ClInclude Include="src\Horizon\Renderer\Buffer.h" />
     <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Horizon\Renderer\Model\Model.h" />
     <ClInclude Include="src\Horizon\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Horizon\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Horizon\Renderer\PerspectiveCamera.h" />
@@ -603,7 +602,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Horizon\Renderer\Mesh\Model.cpp" />
     <ClCompile Include="src\Horizon\Core\Application.cpp" />
     <ClCompile Include="src\Horizon\Core\Layer.cpp" />
     <ClCompile Include="src\Horizon\Core\LayerStack.cpp" />
@@ -613,7 +611,7 @@
     <ClCompile Include="src\Horizon\Renderer\2D\Renderer2D.cpp" />
     <ClCompile Include="src\Horizon\Renderer\3D\Renderer3D.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Horizon\Renderer\Mesh\Mesh.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\Model\Model.cpp" />
     <ClCompile Include="src\Horizon\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Horizon\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Horizon\Renderer\PerspectiveCamera.cpp" />

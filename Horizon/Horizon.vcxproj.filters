@@ -10,6 +10,9 @@
     <Filter Include="src\Horizon\Core">
       <UniqueIdentifier>{FDA31793-E99C-36E5-12CF-1B6AFE2616F1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Horizon\Debug">
+      <UniqueIdentifier>{BB7E18F6-2795-168C-700C-A2ADDC61E713}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Horizon\Events">
       <UniqueIdentifier>{C9A8B2BC-B58C-7312-1EED-6D650AF05D94}</UniqueIdentifier>
     </Filter>
@@ -24,6 +27,9 @@
     </Filter>
     <Filter Include="src\Horizon\Renderer\3D">
       <UniqueIdentifier>{B10CAC14-1D44-F4AB-264E-58CF92041BA5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Horizon\Renderer\Model">
+      <UniqueIdentifier>{4B6311EE-3773-BDBE-A02C-22DD8C5BAC57}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
@@ -99,6 +105,9 @@
     <ClInclude Include="src\Horizon\Core\Window.h">
       <Filter>src\Horizon\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Debug\Instrumentor.h">
+      <Filter>src\Horizon\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Events\ApplicationEvent.h">
       <Filter>src\Horizon\Events</Filter>
     </ClInclude>
@@ -126,10 +135,19 @@
     <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h">
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\Model\Model.h">
+      <Filter>src\Horizon\Renderer\Model</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\OrthographicCamera.h">
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\OrthographicCameraController.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\PerspectiveCamera.h">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\PerspectiveCameraController.h">
       <Filter>src\Horizon\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\RenderCommand.h">
@@ -1428,11 +1446,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Renderer\PerspectiveCameraController.h" />
-    <ClInclude Include="src\Horizon\Renderer\PerspectiveCamera.h" />
-    <ClInclude Include="src\Horizon\Debug\Instrumentor.h" />
-    <ClInclude Include="src\Horizon\Renderer\Mesh\Mesh.h" />
-    <ClInclude Include="src\Horizon\Renderer\Mesh\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Horizon\Core\Application.cpp">
@@ -1462,10 +1475,19 @@
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp">
       <Filter>src\Horizon\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\Model\Model.cpp">
+      <Filter>src\Horizon\Renderer\Model</Filter>
+    </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\OrthographicCamera.cpp">
       <Filter>src\Horizon\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\OrthographicCameraController.cpp">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\PerspectiveCamera.cpp">
+      <Filter>src\Horizon\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\PerspectiveCameraController.cpp">
       <Filter>src\Horizon\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\RenderCommand.cpp">
@@ -1516,9 +1538,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Horizon\Renderer\PerspectiveCameraController.cpp" />
-    <ClCompile Include="src\Horizon\Renderer\PerspectiveCamera.cpp" />
-    <ClCompile Include="src\Horizon\Renderer\Mesh\Mesh.cpp" />
-    <ClCompile Include="src\Horizon\Renderer\Mesh\Model.cpp" />
   </ItemGroup>
 </Project>

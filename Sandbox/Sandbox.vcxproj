@@ -131,31 +131,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Resources\ParticleSystem.h" />
-    <ClInclude Include="src\Resources\Random.h" />
     <ClInclude Include="src\2D\Sandbox2D.h" />
     <ClInclude Include="src\3D\Sandbox3D.h" />
+    <ClInclude Include="src\Resources\ParticleSystem.h" />
+    <ClInclude Include="src\Resources\Random.h" />
     <ClInclude Include="src\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Resources\ParticleSystem.cpp" />
-    <ClCompile Include="src\Resources\Random.cpp" />
     <ClCompile Include="src\2D\Sandbox2D.cpp" />
     <ClCompile Include="src\3D\Sandbox3D.cpp" />
+    <ClCompile Include="src\Resources\ParticleSystem.cpp" />
+    <ClCompile Include="src\Resources\Random.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Horizon\Horizon.vcxproj">
       <Project>{6EE457B5-DAC3-D650-E3DB-61274F3A3DB2}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\Tracer.glsl" />
-    <None Include="assets\shaders\Water.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="..\..\..\Downloads\OpenSans-Regular.ttf" />
-    <Font Include="assets\OpenSans-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

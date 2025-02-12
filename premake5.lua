@@ -20,10 +20,12 @@ IncludeDir["GLFW"] = "Horizon/vendor/GLFW/include"
 IncludeDir["ImGui"] = "Horizon/vendor/imgui"
 IncludeDir["glm"] = "Horizon/vendor/glm"
 IncludeDir["stb_image"] = "Horizon/vendor/stb_image"
+IncludeDir["Assimp"] = "Horizon/vendor/assimp/include"
 
 include "Horizon/vendor/GLFW"
 include "Horizon/vendor/Glad"
 include "Horizon/vendor/ImGui"
+include "Horizon/vendor/assimp"
 
 project "Horizon"
 	location "Horizon"
@@ -61,7 +63,8 @@ project "Horizon"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.Assimp}"
 	}
 
 	links 

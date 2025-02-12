@@ -8,6 +8,7 @@
 
 #include <GLFW/include/GLFW/glfw3.h>
 
+#ifdef test
 Sandbox3D::Sandbox3D()
 	: Layer("Sandbox3D"), m_CameraController(1280.0f / 720.0f, 75.0f, true)
 {
@@ -94,3 +95,4 @@ void Sandbox3D::OnEvent(Horizon::Event& e)
 {
 	m_CameraController.OnEvent(e);
 };
+#endif
