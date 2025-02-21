@@ -33,7 +33,6 @@ namespace Horizon
 
 		// static void DrawCube(const glm::vec3& position, const glm::vec3& size, const glm::vec4& color);
 
-		static void DrawMesh(const Model& model, const glm::vec3& position, 
-			const glm::vec3& size, const glm::vec3& rotation, const glm::vec4& color);
+		static void DrawMesh(const Ref<Model>& model, const glm::vec3 position = glm::vec3(0.0f));
 	};
 }

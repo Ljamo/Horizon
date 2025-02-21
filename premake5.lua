@@ -20,12 +20,13 @@ IncludeDir["GLFW"] = "Horizon/vendor/GLFW/include"
 IncludeDir["ImGui"] = "Horizon/vendor/imgui"
 IncludeDir["glm"] = "Horizon/vendor/glm"
 IncludeDir["stb_image"] = "Horizon/vendor/stb_image"
-IncludeDir["Assimp"] = "Horizon/vendor/assimp/include"
+IncludeDir["assimp"] = "Horizon/vendor/assimp/include"
+
 
 include "Horizon/vendor/GLFW"
 include "Horizon/vendor/Glad"
 include "Horizon/vendor/ImGui"
-include "Horizon/vendor/assimp"
+-- include "Horizon/vendor/assimp"
 
 project "Horizon"
 	location "Horizon"
@@ -64,7 +65,12 @@ project "Horizon"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.Assimp}"
+		"%{IncludeDir.assimp}"
+	}
+
+	libdirs
+	{
+		"Horizon/vendor/assimp/lib"
 	}
 
 	links 
@@ -72,7 +78,9 @@ project "Horizon"
 		"GLFW",
 		"Glad",
 		"ImGui",
-		"opengl32.lib"
+		"opengl32.lib",
+		"assimp.lib",
+		"zlibstatic.lib"
 	}
 
 	filter "system:windows"
@@ -121,12 +129,14 @@ project "Sandbox"
 		"Horizon/vendor/spdlog/include",
 		"Horizon/src",
 		"Horizon/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.assimp}"
 	}
 
 	links
 	{
 		"Horizon"
+		-- "assimp"
 	}
 
 	filter "system:windows"
