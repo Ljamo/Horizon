@@ -20,9 +20,12 @@ Sandbox3D::Sandbox3D()
 void Sandbox3D::OnAttach()
 {
 	// m_CheckerboardTexture = Horizon::Texture2D::Create("assets/textures/Checkerboard.png");
-	std::string path = "assets/models/monkey.fbx";
+	std::string path = "assets/models/test/idk.gltf";
+	std::string path2 = "assets/models/default.fbx";
 	// Horizon::Model m_BaseModel(path);
 	m_BaseModel = Horizon::CreateRef<Horizon::Model>(path);
+	m_BaseModel2 = Horizon::CreateRef<Horizon::Model>(path2);
+	m_BaseModel2->SetPosition(glm::vec3(2.0f));
 	// m_BaseModel->LoadModel();
 }
 
@@ -50,41 +53,18 @@ void Sandbox3D::OnUpdate(Horizon::Timestep ts)
 		Horizon::RenderCommand::Clear();
 	}
 
-	{
+	// float rotation = 100 * sin(glfwGetTime()) * ts;
+	// float position = sin(glfwGetTime()) * ts;
+	// 
+	// m_BaseModel->Rotate(glm::vec3(rotation));
+	// m_BaseModel2->Translate(glm::vec3(position));
 
+	{
 		Horizon::Renderer3D::BeginScene(m_CameraController.GetCamera());
-		// Horizon::Renderer3D::DrawCube({ -1.0f, 0.0f, 0.0f }, { 0.8f, 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-		// Horizon::Renderer3D::DrawCube({ 00.5f, sin(glfwGetTime()-0.1 * sin(2 * glfwGetTime()) * 2), -0.5f}, {0.5f, 0.75f, 0.5f}, {0.2f, 0.3f, 0.8f, 1.0f});
-		// //Horizon::Renderer3D::DrawCube({ sin(glfwGetTime()) + 0.5f, 0.5f, -0.5f}, {0.5f, 0.75f, 0.5f}, {0.2f, 0.3f, 0.8f, 1.0f});
-		// //
-		// Horizon::Mesh pyramidMesh;
-		// pyramidMesh.m_Vertices = {
-		// 	{ { 0.0f, 1.0f, 0.0f }, {0,1,0}, {0.5f,1.0f}, {1,1,1,1} },  // Apex
-		// 	{ { -1.0f, 0.0f, -1.0f }, {0,-1,0}, {0,0},      {1,1,1,1} },
-		// 	{ {  1.0f, 0.0f, -1.0f }, {0,-1,0}, {1,0},      {1,1,1,1} },
-		// 	{ {  1.0f, 0.0f,  1.0f }, {0,-1,0}, {1,1},      {1,1,1,1} },
-		// 	{ { -1.0f, 0.0f,  1.0f }, {0,-1,0}, {0,1},      {1,1,1,1} },
-		// };
-		// // Define triangles for the pyramid (four side triangles)
-		// pyramidMesh.Triangles = {
-		// 	Horizon::Tri(0,1,2),
-		// 	Horizon::Tri(0,2,3),
-		// 	Horizon::Tri(0,3,4),
-		// 	Horizon::Tri(0,4,1)
-		// 	// Optionally, add base triangles here.
-		// };
-		// glm::mat4 pyramidTransform = glm::translate(glm::mat4(1.0f), { 2.0f, 0.0f, 0.0f }) *
-		// 	glm::scale(glm::mat4(1.0f), { 0.5f, 0.5f, 0.5f });
-		// 
-		// // Draw the pyramid with a distinct colour.
-		// Horizon::Renderer3D::DrawMesh(pyramidMesh,
-		// 	{ 2.0f,0.0f,0.0f },    // position
-		// 	{ 0.5f,0.5f,0.5f },    // size
-		// 	{ 0.0f,0.0f,0.0f },    // rotation
-		// 	{ 1.0f,0.8f,0.2f,1.0f });
 		{
 			PROFILE_SCOPE("Sandbox3D::DrawMesh");
 			Horizon::Renderer3D::DrawMesh(m_BaseModel);
+			Horizon::Renderer3D::DrawMesh(m_BaseModel2);
 			// Horizon::Renderer3D::DrawMesh(m_BaseModel, glm::vec3(-1.0f, -1.0f);
 		}
 

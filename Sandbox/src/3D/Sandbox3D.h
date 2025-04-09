@@ -20,6 +20,7 @@ private:
 	Horizon::PerspectiveCameraController m_CameraController;
 	// Horizon::Ref<Horizon::Texture2D> m_CheckerboardTexture;
 	Horizon::Ref<Horizon::Model> m_BaseModel;
+	Horizon::Ref<Horizon::Model> m_BaseModel2;
 	//Horizon::Model m_BaseModel;
 
 	Horizon::Ref<Horizon::VertexArray> m_CubeVA;

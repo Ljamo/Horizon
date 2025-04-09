@@ -51,7 +51,6 @@ namespace Horizon
 		s_V2Data.QuadVertexArray = VertexArray::Create();
 
 		s_V2Data.QuadVertexBuffer = VertexBuffer::Create(s_V2Data.MaxVertices * sizeof(PerVertex));
-		// quadVB.reset(VertexBuffer::Create(s_V2Data.MaxVertices * sizeof(QuadVertex)));
 		s_V2Data.QuadVertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float4, "a_Color" },
@@ -63,8 +62,10 @@ namespace Horizon
 
 		s_V2Data.QuadVertexBufferBase = new PerVertex[s_V2Data.MaxVertices];
 
+		// Set up quad indices
+		// Does not allow for meshing
+		// Preset indices for quads
 		uint32_t* quadIndices = new uint32_t[s_V2Data.MaxIndices];
-
 		uint32_t offset = 0;
 		for (uint32_t i = 0; i < s_V2Data.MaxIndices; i+= 6)
 		{
@@ -84,6 +85,7 @@ namespace Horizon
 
 		delete[] quadIndices;
 
+		// End of quad index setup
 
 		s_V2Data.WhiteTexture = Texture2D::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;

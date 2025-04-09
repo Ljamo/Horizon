@@ -1,8 +1,8 @@
 #include "hzpch.h"
 #include "Model.h"
 
-// #include <ofbx.h>
-
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 namespace Horizon
 {
     void Model::LoadModel()
@@ -99,6 +99,17 @@ namespace Horizon
         // 1. diffuse maps
         std::vector<Ref<Texture2D>> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+
+        // If no texture was loaded, create a default pink texture.
+        if (textures.empty())
+        {
+            HZ_CORE_WARN("Empty Texture!");
+            Ref<Texture2D> pinkTexture = Texture2D::Create(1, 1);
+            uint32_t pinkPixel = 0xffff00ff; // pink colour in RGBA (fuchsia)
+            pinkTexture->SetData(&pinkPixel, sizeof(uint32_t));
+            textures.push_back(pinkTexture);
+        }
+
         // 2. specular maps
         // vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
         // textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
@@ -118,6 +129,7 @@ namespace Horizon
 		std::vector<Ref<Texture2D>> textures;
         for (uint32_t i = 0; i < mat->GetTextureCount(type); i++)
         {
+            HZ_CORE_WARN("Texture Count: %0", mat->GetTextureCount(type));
             aiString str;
             mat->GetTexture(type, i, &str);
             
@@ -138,74 +150,17 @@ namespace Horizon
                 m_LoadedTextures.push_back(texture);  // add to loaded textures
 			}
         }
+        HZ_CORE_WARN(mat->GetTextureCount(type));
         return textures;
     }
 
-
-
-
-    // void Model::LoadModel()
-    // {
-    //     std::ifstream file(m_Path, std::ios::binary | std::ios::ate);
-    //     if (!file)
-    //     {
-    //         HZ_CORE_ERROR("Failed to open file: {0}", m_Path);
-    //         return;
-    //     }
-    // 
-    //     std::streamsize size = file.tellg();
-    //     file.seekg(0, std::ios::beg);
-    //     std::vector<char> buffer(size);
-    //     if (!file.read(buffer.data(), size))
-    //     {
-    //         HZ_CORE_ERROR("Failed to read file: {0}", m_Path);
-    //         return;
-    //     }
-    // 
-    //     // Cast the buffer to ofbx::u8* and use (ofbx::u16)0 as load flag.
-    //     const ofbx::IScene* scene = ofbx::load((const ofbx::u8*)buffer.data(), static_cast<int>(size), (ofbx::u16)0);
-    //     if (!scene)
-    //     {
-    //         HZ_CORE_ERROR("Failed to parse FBX file: {0}", m_Path);
-    //         return;
-    //     }
-    // 
-    //     int meshCount = scene->getMeshCount();
-    //     for (int i = 0; i < meshCount; ++i)
-    //     {
-    //         ofbx::Mesh* mesh = const_cast<ofbx::Mesh*>(scene->getMesh(i));
-    //         ProcessFBXMesh(mesh);
-    //     }
-    // 
-    //     // Clean up by destroying the scene.
-    //     const_cast<ofbx::IScene*>(scene)->destroy();
-    // }
-    // 
-    // void Model::ProcessFBXMesh(ofbx::Mesh* mesh)
-    // {
-	// 	std::vector<Vertex> vertices;
-	// 	std::vector<uint32_t> indices;
-	// 	std::vector<Ref<Texture2D>> textures;
-	// 	int vertexCount = mesh->getGeometry()->getVertexCount();
-	// 	const ofbx::Vec3* fbxVertices = mesh->getGeometry()->getVertices();
-	// 	const ofbx::Vec3* fbxNormals = mesh->getGeometry()->getNormals();
-	// 	const ofbx::Vec2* fbxUVs = mesh->getGeometry()->getUVs();
-	// 	const ofbx::Vec4* fbxColors = mesh->getGeometry()->getColors();
-	// 	for (int i = 0; i < vertexCount; ++i)
-	// 	{
-	// 		Vertex vertex;
-	// 		vertex.Position = { fbxVertices[i].x, fbxVertices[i].y, fbxVertices[i].z };
-	// 		vertex.Normal = { fbxNormals[i].x, fbxNormals[i].y, fbxNormals[i].z };
-	// 		vertex.TexCoord = { fbxUVs[i].x, fbxUVs[i].y };
-	// 		vertex.Color = { fbxColors[i].x, fbxColors[i].y, fbxColors[i].z, fbxColors[i].w };
-	// 		vertices.push_back(vertex);
-	// 	}
-	// 	int indexCount = mesh->getGeometry()->getIndexCount();
-	// 	const int* fbxIndices = mesh->getGeometry()->getFaceIndices();
-	// 	for (int i = 0; i < indexCount; ++i)
-	// 	{
-	// 		indices.push_back(fbxIndices[i]);
-	// 	}
-	// 	m_Meshes.emplace_back(vertices, indices, textures);
-    // }
+    void Model::UpdateModelMatrix()
+    {
+        m_ModelMatrix = glm::mat4(1.0f);
+        m_ModelMatrix = glm::translate(m_ModelMatrix, m_Position);
+        m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+        m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+        m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+        m_ModelMatrix = glm::scale(m_ModelMatrix, m_Scale);
+    }
 }

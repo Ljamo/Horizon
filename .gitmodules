@@ -11,3 +11,6 @@
 [submodule "Horizon/vendor/glm"]
 	path = Horizon/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "Horizon/vendor/assimp"]
+	path = Horizon/vendor/assimp
+	url = https://github.com/Ljamo/assimp
