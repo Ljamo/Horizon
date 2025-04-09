@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>HZ_PLATFORM_WINDOWS;HZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Horizon\vendor\assimp\_config_headers;..\Horizon\vendor\assimp\_config_headers\assimp;..\Horizon\vendor\assimp\assimp\include;..\Horizon\vendor\spdlog\include;..\Horizon\src;..\Horizon\vendor;..\Horizon\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Horizon\vendor\spdlog\include;..\Horizon\src;..\Horizon\vendor;..\Horizon\vendor\glm;..\Horizon\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -95,7 +95,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>HZ_PLATFORM_WINDOWS;HZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Horizon\vendor\assimp\_config_headers;..\Horizon\vendor\assimp\_config_headers\assimp;..\Horizon\vendor\assimp\assimp\include;..\Horizon\vendor\spdlog\include;..\Horizon\src;..\Horizon\vendor;..\Horizon\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Horizon\vendor\spdlog\include;..\Horizon\src;..\Horizon\vendor;..\Horizon\vendor\glm;..\Horizon\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -115,7 +115,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>HZ_PLATFORM_WINDOWS;HZ_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Horizon\vendor\assimp\_config_headers;..\Horizon\vendor\assimp\_config_headers\assimp;..\Horizon\vendor\assimp\assimp\include;..\Horizon\vendor\spdlog\include;..\Horizon\src;..\Horizon\vendor;..\Horizon\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Horizon\vendor\spdlog\include;..\Horizon\src;..\Horizon\vendor;..\Horizon\vendor\glm;..\Horizon\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -148,6 +148,9 @@
     <ProjectReference Include="..\Horizon\Horizon.vcxproj">
       <Project>{6EE457B5-DAC3-D650-E3DB-61274F3A3DB2}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\Texture3D.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

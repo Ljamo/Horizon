@@ -23,11 +23,10 @@ IncludeDir["stb_image"] = "Horizon/vendor/stb_image"
 IncludeDir["assimp"] = "Horizon/vendor/assimp/include"
 
 
-include "Horizon/vendor/assimp"
 include "Horizon/vendor/GLFW"
 include "Horizon/vendor/Glad"
 include "Horizon/vendor/ImGui"
-include "Horizon/vendor/assimp"
+-- include "Horizon/vendor/assimp"
 
 project "Horizon"
 	location "Horizon"
@@ -69,11 +68,10 @@ project "Horizon"
 		"%{IncludeDir.assimp}"
 	}
 
-	dependson { "assimp" }
-	-- libdirs
-	-- {
-	-- 	"Horizon/vendor/assimp/lib"
-	-- }
+	libdirs
+	{
+		"Horizon/vendor/assimp/lib"
+	}
 
 	links 
 	{ 
@@ -81,8 +79,8 @@ project "Horizon"
 		"Glad",
 		"ImGui",
 		"opengl32.lib",
-		"assimp",
-		-- "zlibstatic"
+		"assimp.lib",
+		"zlibstatic.lib"
 	}
 
 	filter "system:windows"
@@ -123,7 +121,7 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
@@ -132,11 +130,12 @@ project "Sandbox"
 		"Horizon/src",
 		"Horizon/vendor",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.assimp}"
 	}
 
 	links
 	{
-		"Horizon",
+		"Horizon"
 		-- "assimp"
 	}
 
@@ -162,3 +161,8 @@ project "Sandbox"
 		defines "HZ_DIST"
 		runtime "Release"
 		optimize "on"
+
+--project "GLFW"
+--	location "GLFW"
+--	staticruntime "on"
+--	runtime "Release"

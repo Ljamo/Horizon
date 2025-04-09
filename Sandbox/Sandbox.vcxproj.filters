@@ -41,4 +41,7 @@
     </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\Texture3D.glsl" />
+  </ItemGroup>
 </Project>
