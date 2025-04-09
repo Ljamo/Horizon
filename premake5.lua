@@ -109,6 +109,10 @@ project "Horizon"
 		defines "HZ_DIST"
 		runtime "Release"
 		optimize "on"
+		
+	filter "action:vs*"
+		buildoptions { "/utf-8" }
+	
 
 project "Sandbox"
 	location "Sandbox"
@@ -162,3 +166,6 @@ project "Sandbox"
 		defines "HZ_DIST"
 		runtime "Release"
 		optimize "on"
+	
+	filter "action:vs*"
+    	buildoptions { "/utf-8" }
