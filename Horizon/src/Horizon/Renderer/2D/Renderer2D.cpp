@@ -63,11 +63,12 @@ namespace Horizon
 		s_V2Data.QuadVertexBufferBase = new PerVertex[s_V2Data.MaxVertices];
 
 		// Set up quad indices
-		// Does not allow for meshing
+
 		// Preset indices for quads
 		uint32_t* quadIndices = new uint32_t[s_V2Data.MaxIndices];
+
 		uint32_t offset = 0;
-		for (uint32_t i = 0; i < s_V2Data.MaxIndices; i+= 6)
+		for (uint32_t i = 0; i < s_V2Data.MaxIndices; i += 6)
 		{
 			quadIndices[i + 0] = offset + 0;
 			quadIndices[i + 1] = offset + 1;
@@ -105,6 +106,7 @@ namespace Horizon
 	void Renderer2D::Shutdown()
 	{
 		// HZ_INFO("No V2Data to delete.");
+		delete s_V2Data.QuadVertexBufferBase;
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)

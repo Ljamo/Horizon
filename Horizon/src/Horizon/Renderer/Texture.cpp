@@ -30,4 +30,19 @@ namespace Horizon {
 		return nullptr;
 	}
 
+	Ref<Texture2D> Texture2D::CreateFromMemory(unsigned char* data, uint32_t size)
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGLTexture2D>(data, size);
+		case RendererAPI::API::None:
+			HZ_CORE_ASSERT(false, "RendererAPI::None is not supported!");
+			return nullptr;
+		}
+
+		HZ_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
+	}
+
 }

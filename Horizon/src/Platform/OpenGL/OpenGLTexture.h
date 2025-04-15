@@ -11,6 +11,7 @@ namespace Horizon {
 	public:
 		OpenGLTexture2D(uint32_t width, uint32_t height);
 		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(unsigned char* data, uint32_t size);
 		virtual ~OpenGLTexture2D();
 
 		virtual uint32_t GetWidth() const override { return m_Width; }
@@ -25,6 +26,9 @@ namespace Horizon {
 		{
 			return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID;
 		}
+
+		const uint32_t GetRendererID() const { return m_RendererID; }
+
 	private:
 		std::string m_Path;
 		uint32_t m_Width, m_Height;

@@ -16,10 +16,10 @@ namespace Horizon
 		glm::vec3 Normal;
 		glm::vec2 TexCoord;
 		float TexIndex;
-		glm::vec4 Color;
+		// glm::vec4 Color;
 	};
 
-	class Mesh
+	struct Mesh
 	{
 	public:
 		std::vector<Vertex> m_Vertices;
@@ -73,7 +73,8 @@ namespace Horizon
 		void LoadModel();
 		void ProcessNode(aiNode* node, const aiScene* scene);
 		Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
-		std::vector<Ref<Texture2D>> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+		std::vector<Ref<Texture2D>> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, 
+			const std::string& typeName, const aiScene* scene);
 		
 		void UpdateModelMatrix();
 	};

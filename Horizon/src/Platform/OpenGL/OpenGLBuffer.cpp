@@ -9,6 +9,8 @@ namespace Horizon {
 	// VertexBuffer //																						//////////////
 	/////////////////																						//////////////
 
+	
+
 	OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
 	{
 		HZ_PROFILE_FUNCTION();
@@ -35,6 +37,7 @@ namespace Horizon {
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 	}
+
 
 	void OpenGLVertexBuffer::Unbind() const
 	{

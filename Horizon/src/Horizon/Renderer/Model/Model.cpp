@@ -3,19 +3,30 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include <filesystem>
+
+#include <stb_image.h>
+
 namespace Horizon
 {
     void Model::LoadModel()
     {
         Assimp::Importer importer;
-        const const aiScene* scene = importer.ReadFile(m_Path, aiProcess_Triangulate |
-            aiProcess_FlipUVs);
+        const aiScene* scene = importer.ReadFile(
+            m_Path,
+            aiProcess_Triangulate |
+            aiProcess_GenNormals |    // Generate normals if missing
+            // aiProcess_FlipUVs |       // Flip UVs for OpenGL
+            aiProcess_CalcTangentSpace // Required for normal maps
+        );
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
-            HZ_CORE_ERROR("Error::Model::Assimp::%0", importer.GetErrorString());
+            HZ_CORE_ERROR("Assimp Error: {0}", importer.GetErrorString());
             return;
         }
+
         ProcessNode(scene->mRootNode, scene);
     }
 
@@ -63,16 +74,6 @@ namespace Horizon
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
                 vertex.TexCoord = vec;
-                // tangent
-                // vector.x = mesh->mTangents[i].x;
-                // vector.y = mesh->mTangents[i].y;
-                // vector.z = mesh->mTangents[i].z;
-                // vertex.Tangent = vector;
-                // // bitangent
-                // vector.x = mesh->mBitangents[i].x;
-                // vector.y = mesh->mBitangents[i].y;
-                // vector.z = mesh->mBitangents[i].z;
-                // vertex.Bitangent = vector;
             }
             else
                 vertex.TexCoord = glm::vec2(0.0f, 0.0f);
@@ -97,62 +98,146 @@ namespace Horizon
         // normal: texture_normalN
 
         // 1. diffuse maps
-        std::vector<Ref<Texture2D>> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+        std::vector<Ref<Texture2D>> diffuseMaps = LoadMaterialTextures(
+            material, aiTextureType_DIFFUSE, "texture_diffuse", scene
+        );
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
         // If no texture was loaded, create a default pink texture.
-        if (textures.empty())
+        if (diffuseMaps.empty()) 
         {
-            HZ_CORE_WARN("Empty Texture!");
-            Ref<Texture2D> pinkTexture = Texture2D::Create(1, 1);
-            uint32_t pinkPixel = 0xffff00ff; // pink colour in RGBA (fuchsia)
-            pinkTexture->SetData(&pinkPixel, sizeof(uint32_t));
-            textures.push_back(pinkTexture);
+            Ref<Texture2D> defaultTex = Texture2D::Create(1, 1);
+            uint32_t pink = 0xFFFF00FF; // RGBA pink
+            defaultTex->SetData(&pink, sizeof(uint32_t));
+            textures.push_back(defaultTex);
         }
-
-        // 2. specular maps
-        // vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-        // textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-        // // 3. normal maps
-        // std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
-        // textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-        // // 4. height maps
-        // std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-        // textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-
-        
         return Mesh(vertices, indices, textures);
     }
 
-    std::vector<Ref<Texture2D>> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+    std::vector<Ref<Texture2D>> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type,
+        const std::string& typeName, const aiScene* scene)
     {
-		std::vector<Ref<Texture2D>> textures;
-        for (uint32_t i = 0; i < mat->GetTextureCount(type); i++)
+        // Get the number of textures for this type from the material
+        int textureCount = mat->GetTextureCount(type);
+        HZ_CORE_WARN("Material has {0} {1} texture(s)", textureCount, typeName);
+        std::vector<Ref<Texture2D>> textures;
+
+        for (int i = 0; i < textureCount; i++)
         {
-            HZ_CORE_WARN("Texture Count: %0", mat->GetTextureCount(type));
             aiString str;
             mat->GetTexture(type, i, &str);
-            
-			bool skip = false;
-			for (uint32_t j = 0; j < m_LoadedTextures.size(); j++)
-			{
-				if (std::strcmp(m_LoadedTextures[j]->GetPath().c_str(), str.C_Str()) == 0)
-				{
-					textures.push_back(m_LoadedTextures[j]);
-					skip = true;
-					break;
-				}
-			}
-			if (!skip)
-			{   // if texture hasn't been loaded already, load it
-				Ref<Texture2D> texture = Texture2D::Create(str.C_Str());
-				textures.push_back(texture);
-                m_LoadedTextures.push_back(texture);  // add to loaded textures
-			}
+            // Log the texture identifier from Assimp:
+            HZ_CORE_WARN("Texture identifier: {0}", str.C_Str());
+
+            // Check for embedded textures:
+            const aiTexture* embeddedTexture = scene->GetEmbeddedTexture(str.C_Str());
+            if (embeddedTexture)
+            {
+                if (embeddedTexture->mHeight == 0)
+                {
+                    try {
+                        Ref<Texture2D> texture = Texture2D::CreateFromMemory(
+                            reinterpret_cast<unsigned char*>(embeddedTexture->pcData),
+                            embeddedTexture->mWidth);
+                        textures.push_back(texture);
+                        m_LoadedTextures.push_back(texture);
+                        continue; // Continue to next texture if this one is embedded
+                    }
+                    catch (...)
+                    {
+                        HZ_CORE_ERROR("Failed to load embedded texture: {0}", str.C_Str());
+                    }
+                }
+            }
+
+            bool skip = false;
+
+            // Adjust the texture identifier if an unwanted folder prefix is present.
+            std::string textureIdentifier = str.C_Str();
+            const std::string folderPrefix = "Ico.fbm\\";
+            if (textureIdentifier.find(folderPrefix) == 0)
+            {
+                textureIdentifier = textureIdentifier.substr(folderPrefix.length());
+            }
+
+            // Construct full path for the texture file.
+            std::filesystem::path texturePath = std::filesystem::path(m_Path).parent_path() / textureIdentifier;
+            std::string fullPath = texturePath.string();
+
+            // Log out the texture search path.
+            HZ_CORE_WARN("Looking for texture at: {0}", fullPath);
+
+            // Verify existence of the file
+            if (std::filesystem::exists(fullPath))
+            {
+                HZ_CORE_INFO("Texture file exists at: {0}", fullPath);
+            }
+            else
+            {
+                HZ_CORE_ERROR("Texture file NOT found at: {0}", fullPath);
+            }
+
+            // Check if the texture was already loaded.
+            for (uint32_t j = 0; j < m_LoadedTextures.size(); j++)
+            {
+                if (m_LoadedTextures[j]->GetPath() == fullPath)
+                {
+                    textures.push_back(m_LoadedTextures[j]);
+                    skip = true;
+                    break;
+                }
+            }
+
+            if (!skip)
+            {
+                try {
+                    Ref<Texture2D> texture = Texture2D::Create(fullPath);
+                    textures.push_back(texture);
+                    m_LoadedTextures.push_back(texture);
+                }
+                catch (...)
+                {
+                    HZ_CORE_ERROR("Failed to load texture: {0}", fullPath);
+                }
+            }
         }
-        HZ_CORE_WARN(mat->GetTextureCount(type));
         return textures;
     }
+
+
+
+    // std::vector<Ref<Texture2D>> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type,
+    //     const std::string& typeName, const aiScene* scene)
+    // {
+	// 	std::vector<Ref<Texture2D>> textures;
+    //     for (uint32_t i = 0; i < mat->GetTextureCount(type); i++)
+    //     {
+    //         std::string s = "Texture Count: " + std::to_string(mat->GetTextureCount(type));
+    //         HZ_CORE_WARN(s);
+    //         aiString str;
+    //         mat->GetTexture(type, i, &str);
+    //         
+	// 		bool skip = false;
+	// 		for (uint32_t j = 0; j < m_LoadedTextures.size(); j++)
+	// 		{
+	// 			if (std::strcmp(m_LoadedTextures[j]->GetPath().c_str(), str.C_Str()) == 0)
+	// 			{
+	// 				textures.push_back(m_LoadedTextures[j]);
+	// 				skip = true;
+	// 				break;
+	// 			}
+	// 		}
+	// 		if (!skip)
+	// 		{   // if texture hasn't been loaded already, load it
+	// 			Ref<Texture2D> texture = Texture2D::Create(str.C_Str());
+	// 			textures.push_back(texture);
+    //             m_LoadedTextures.push_back(texture);  // add to loaded textures
+	// 		}
+    //     }
+    //     std::string s = mat->GetTextureCount(type) > 0 ? std::to_string(mat->GetTextureCount(type)) : "No Texture";
+    //     HZ_CORE_WARN(s);
+    //     return textures;
+    // }
 
     void Model::UpdateModelMatrix()
     {

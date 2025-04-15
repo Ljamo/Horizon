@@ -219,6 +219,9 @@
     <ClInclude Include="vendor\glm\glm\detail\compute_common.hpp">
       <Filter>vendor\glm\glm\detail</Filter>
     </ClInclude>
+    <ClInclude Include="vendor\glm\glm\detail\compute_vector_decl.hpp">
+      <Filter>vendor\glm\glm\detail</Filter>
+    </ClInclude>
     <ClInclude Include="vendor\glm\glm\detail\compute_vector_relational.hpp">
       <Filter>vendor\glm\glm\detail</Filter>
     </ClInclude>
@@ -375,7 +378,7 @@
     <ClInclude Include="vendor\glm\glm\detail\type_vec4.inl">
       <Filter>vendor\glm\glm\detail</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\glm\glm\detail\type_vec4_simd.inl">
+    <ClInclude Include="vendor\glm\glm\detail\type_vec_simd.inl">
       <Filter>vendor\glm\glm\detail</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\exponential.hpp">
@@ -1122,7 +1125,7 @@
     <ClInclude Include="vendor\glm\glm\gtx\fast_trigonometry.inl">
       <Filter>vendor\glm\glm\gtx</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\glm\glm\gtx\float_notmalize.inl">
+    <ClInclude Include="vendor\glm\glm\gtx\float_normalize.inl">
       <Filter>vendor\glm\glm\gtx</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\gtx\functions.hpp">
@@ -1248,9 +1251,6 @@
     <ClInclude Include="vendor\glm\glm\gtx\number_precision.hpp">
       <Filter>vendor\glm\glm\gtx</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\glm\glm\gtx\number_precision.inl">
-      <Filter>vendor\glm\glm\gtx</Filter>
-    </ClInclude>
     <ClInclude Include="vendor\glm\glm\gtx\optimum_pow.hpp">
       <Filter>vendor\glm\glm\gtx</Filter>
     </ClInclude>
@@ -1339,6 +1339,12 @@
       <Filter>vendor\glm\glm\gtx</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\gtx\string_cast.inl">
+      <Filter>vendor\glm\glm\gtx</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\glm\glm\gtx\structured_bindings.hpp">
+      <Filter>vendor\glm\glm\gtx</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\glm\glm\gtx\structured_bindings.inl">
       <Filter>vendor\glm\glm\gtx</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\gtx\texture.hpp">
