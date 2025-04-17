@@ -42,6 +42,10 @@ namespace Horizon {
 		{
 			float rotationSpeed = m_CameraRotationSpeed * ts;
 
+			float mouseX = Input::GetMouseX() * rotationSpeed;
+			float mousey = Input::GetMouseY() * rotationSpeed;
+
+
 			// Rotate camera using Up/Down/Left/Right keys
 			if (Input::IsKeyPressed(HZ_KEY_UP))
 				m_CameraRotation.x += rotationSpeed; // Pitch
@@ -56,6 +60,9 @@ namespace Horizon {
 			m_CameraRotation.x = glm::clamp(m_CameraRotation.x, -89.0f, 89.0f);
 
 		}
+
+		if (Input::IsMouseButtonPressed(1))
+			HZ_CORE_WARN("Mouse Pressed");
 
 		
 

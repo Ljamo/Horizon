@@ -143,6 +143,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Horizon\Audio\MaterialProperties.h" />
     <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Core\Application.h" />
     <ClInclude Include="src\Horizon\Core\Core.h" />
@@ -607,6 +608,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Horizon\Audio\MaterialProperties.cpp" />
     <ClCompile Include="src\Horizon\Core\Application.cpp" />
     <ClCompile Include="src\Horizon\Core\Layer.cpp" />
     <ClCompile Include="src\Horizon\Core\LayerStack.cpp" />

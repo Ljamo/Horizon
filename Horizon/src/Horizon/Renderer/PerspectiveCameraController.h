@@ -24,6 +24,8 @@ namespace Horizon
 		PerspectiveCamera& GetCamera() { return m_Camera; }
 		const PerspectiveCamera& GetCamera() const { return m_Camera; }
 
+		const glm::vec3& GetPosition() const { return m_CameraPosition; }
+
 
 		// Don't use this. Just use the FOV, and position
 		// Getter/Setter for zoom level (if applicable)
@@ -38,14 +40,14 @@ namespace Horizon
 		bool OnWindowResized(WindowResizeEvent& e);
 
 		// Updates the camera's projection matrix
-		void UpdateProjection();
+		//void UpdateProjection();
 
 	private:
 		// Camera properties
 		float m_AspectRatio;                  // Aspect ratio of the view
 		float m_FOV;                          // Field of view in degrees
 		float m_ZoomLevel = 1.0f;             // Zoom level for scaling projection
-
+		
 		PerspectiveCamera m_Camera;           // Camera instance
 
 		// Movement and rotation control
@@ -54,7 +56,7 @@ namespace Horizon
 		glm::vec3 m_CameraRotation = { 0.0f, -90.0f, 0.0f }; // Yaw, pitch, roll rotation
 
 		// Movement and rotation speeds
-		float m_CameraTranslationSpeed = 5.0f; // Units per second
+		float m_CameraTranslationSpeed = 25.0f; // Units per second
 		float m_CameraRotationSpeed = 180.0f;  // Degrees per second
 	};
 }

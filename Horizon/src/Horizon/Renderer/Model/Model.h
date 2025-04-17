@@ -8,6 +8,8 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 
+#include <Horizon/Audio/MaterialProperties.h>
+
 namespace Horizon
 {
 	struct Vertex
@@ -26,17 +28,32 @@ namespace Horizon
 		std::vector<uint32_t> m_Indices;
 		std::vector<Ref<Texture2D>> m_Textures;
 
+		MaterialAudioProperties m_AudioProperties;
+
 		Mesh(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, std::vector<Ref<Texture2D>>& textures)
-			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures) {
+			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures)
+		{
 		}
+
+		void SetAudioProperties(MaterialAudioProperties& audioProperties)
+		{
+			m_AudioProperties = audioProperties;
+		}
+
+		const MaterialAudioProperties& GetAudioProperties() const { return m_AudioProperties; }
+
+	private:
+		int m_MeshID;
+		// static int s_MeshIDCounter;
 	};
 	
 	class Model
 	{
 	public:
 		Model(const std::string& path)
-			: m_Path(path)
+			: m_Path(path), m_ModelID(s_ModelIDCounter)
 		{
+			s_ModelIDCounter++;
 			LoadModel();
 		}
 
@@ -77,6 +94,10 @@ namespace Horizon
 			const std::string& typeName, const aiScene* scene);
 		
 		void UpdateModelMatrix();
+
+	private:
+		int m_ModelID;
+		static int s_ModelIDCounter;
 	};
 
 }

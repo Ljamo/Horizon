@@ -19,15 +19,17 @@ Sandbox3D::Sandbox3D()
 void Sandbox3D::OnAttach()
 {
 	// m_CheckerboardTexture = Horizon::Texture2D::Create("assets/textures/Checkerboard.png");
-	std::string path3 = "assets/models/teapot.fbx";
-	std::string path = "assets/models/test/Torus.fbx";
-	std::string path2 = "assets/models/Ico.fbx";
+	std::string path3 = "assets/models/Roof.fbx";
+	std::string path = "assets/models/Floor.fbx";
+	std::string path2 = "assets/models/Walls.fbx";
 	// Horizon::Model m_BaseModel(path);
 	m_BaseModel = Horizon::CreateRef<Horizon::Model>(path);
 	m_BaseModel2 = Horizon::CreateRef<Horizon::Model>(path2);
 	m_BaseModel3 = Horizon::CreateRef<Horizon::Model>(path3);
-	m_BaseModel2->SetPosition(glm::vec3(2.0f));
-	//m_BaseModel3->SetPosition(glm::vec3(-2.0f));
+	// m_BaseModel2->SetPosition(glm::vec3(2.0f));
+	m_BaseModel->SetRotation(glm::vec3(-90.0f, 0.0f, 180.0f));
+	m_BaseModel2->SetRotation(glm::vec3(-90.0f, 0.0f, 180.0f));
+	m_BaseModel3->SetRotation(glm::vec3(-90.0f, 0.0f, 180.0f));
 	// m_BaseModel->LoadModel();
 }
 
@@ -60,6 +62,9 @@ void Sandbox3D::OnUpdate(Horizon::Timestep ts)
 	// 
 	// m_BaseModel->Rotate(glm::vec3(rotation));
 	// m_BaseModel2->Translate(glm::vec3(position));
+
+	// m_Rotation += glm::vec3(10.0f * ts);
+	// m_BaseModel2->SetRotation(m_Rotation);
 
 	{
 		Horizon::Renderer3D::BeginScene(m_CameraController.GetCamera());
@@ -96,6 +101,7 @@ void Sandbox3D::OnImGuiRender()
 	m_ProfileResults.clear();
 	
 	ImGui::Text("Test");
+
 
 	ImGui::End();
 

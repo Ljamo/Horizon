@@ -10,6 +10,8 @@
 
 namespace Horizon
 {
+    int Model::s_ModelIDCounter = 0;
+
     void Model::LoadModel()
     {
         Assimp::Importer importer;
@@ -203,41 +205,6 @@ namespace Horizon
         }
         return textures;
     }
-
-
-
-    // std::vector<Ref<Texture2D>> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type,
-    //     const std::string& typeName, const aiScene* scene)
-    // {
-	// 	std::vector<Ref<Texture2D>> textures;
-    //     for (uint32_t i = 0; i < mat->GetTextureCount(type); i++)
-    //     {
-    //         std::string s = "Texture Count: " + std::to_string(mat->GetTextureCount(type));
-    //         HZ_CORE_WARN(s);
-    //         aiString str;
-    //         mat->GetTexture(type, i, &str);
-    //         
-	// 		bool skip = false;
-	// 		for (uint32_t j = 0; j < m_LoadedTextures.size(); j++)
-	// 		{
-	// 			if (std::strcmp(m_LoadedTextures[j]->GetPath().c_str(), str.C_Str()) == 0)
-	// 			{
-	// 				textures.push_back(m_LoadedTextures[j]);
-	// 				skip = true;
-	// 				break;
-	// 			}
-	// 		}
-	// 		if (!skip)
-	// 		{   // if texture hasn't been loaded already, load it
-	// 			Ref<Texture2D> texture = Texture2D::Create(str.C_Str());
-	// 			textures.push_back(texture);
-    //             m_LoadedTextures.push_back(texture);  // add to loaded textures
-	// 		}
-    //     }
-    //     std::string s = mat->GetTextureCount(type) > 0 ? std::to_string(mat->GetTextureCount(type)) : "No Texture";
-    //     HZ_CORE_WARN(s);
-    //     return textures;
-    // }
 
     void Model::UpdateModelMatrix()
     {

@@ -22,6 +22,7 @@ private:
 	Horizon::Ref<Horizon::Model> m_BaseModel;
 	Horizon::Ref<Horizon::Model> m_BaseModel2;
 	Horizon::Ref<Horizon::Model> m_BaseModel3;
+	glm::vec3 m_Rotation = glm::vec3(0.0f);
 	//Horizon::Model m_BaseModel;
 
 	Horizon::Ref<Horizon::VertexArray> m_CubeVA;

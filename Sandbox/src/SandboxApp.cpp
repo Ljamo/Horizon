@@ -1,5 +1,3 @@
-// #include "2D/Sandbox2D.h"
-// #include "3D/Sandbox3D.h"
 #include <Horizon.h>
 #include "Horizon/Core/EntryPoint.h"
 

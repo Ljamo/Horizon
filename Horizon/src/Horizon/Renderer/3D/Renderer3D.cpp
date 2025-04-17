@@ -179,17 +179,19 @@ namespace Horizon
 		// Check to see if texture is already bound
 		for (const auto texture : textures)
 		{
+			bool alreadyExists = false;
 			for (uint32_t i = 1; i < s_V3Data.TextureSlotIndex; i++)
 			{
 				if (*s_V3Data.TextureSlots[i].get() == *texture.get())
 				{
 					texIndex = (float)i;
+					alreadyExists = true;
 					break;
 				}
 			}
 
 			// If texture is not bound, bind
-			if (texIndex == 0.0f)
+			if (!alreadyExists)
 			{
 				texIndex = (float)s_V3Data.TextureSlotIndex;
 				s_V3Data.TextureSlots[s_V3Data.TextureSlotIndex] = texture;
