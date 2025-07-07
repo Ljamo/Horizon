@@ -6,7 +6,7 @@
 namespace Horizon {
 
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-		: m_Width(width), m_Height(height)
+		: m_Width(width), m_Height(height), m_HasPath(false)
 	{
 		m_InternalFormat = GL_RGBA8;
 		m_DataFormat = GL_RGBA;

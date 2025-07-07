@@ -43,7 +43,7 @@ namespace Horizon
 		const MaterialAudioProperties& GetAudioProperties() const { return m_AudioProperties; }
 
 	private:
-		int m_MeshID;
+		//int m_MeshID;
 		// static int s_MeshIDCounter;
 	};
 	

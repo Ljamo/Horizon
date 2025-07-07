@@ -13,15 +13,6 @@ namespace Horizon
 {
 	/* Model.h contains vertex struct*/
 
-	// struct Vertex
-	// {
-	// 	glm::vec3 Position;
-	// 	glm::vec3 Normal;
-	// 	glm::vec2 TexCoord;
-	// 	// glm::vec4 Color;
-	// 	float TextureIndex;
-	// };
-
 	struct Renderer3DData
 	{
 		//const uint32_t MaxQuads = 10000;
@@ -40,8 +31,10 @@ namespace Horizon
 		uint32_t MeshIndexCount = 0;
 		uint32_t* MeshIndexBufferBase = nullptr;
 
+		std::map<std::string, uint32_t> PreLoadedTextureID;
 		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1; // 0 = White Texture
+
 	};
 
 	static Renderer3DData s_V3Data;
@@ -71,22 +64,6 @@ namespace Horizon
 
 		// Should make sure that this works
 		s_V3Data.MeshIndexBufferBase = new uint32_t[s_V3Data.MaxIndices];
-		// uint32_t offset = 0;
-		// for (uint32_t i = 0; i < s_V3Data.MaxIndices; i+=3)
-		// {
-		// 	triIndices[i + 0] = offset + 0;
-		// 	triIndices[i + 1] = offset + 1;
-		// 	triIndices[i + 2] = offset + 2;
-		// 
-		// 	offset += 3;
-		// }
-		// 
-		// Ref<IndexBuffer> triIB = IndexBuffer::Create(triIndices, s_V3Data.MaxIndices);
-		// s_V3Data.MeshVertexArray->SetIndexBuffer(triIB);
-
-		// delete[] triIndices;
-
-		/* End triIndices */
 
 		s_V3Data.WhiteTexture = Texture2D::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
@@ -172,9 +149,7 @@ namespace Horizon
 		const auto& meshes = model->GetMeshes();
 		const auto& textures = model->GetLoadedTextures();
 
-		/////////////////////////////////////////////////////
 		/////////////  Begin textures  //////////////////////
-		/////////////////////////////////////////////////////
 
 		// Check to see if texture is already bound
 		for (const auto texture : textures)
@@ -182,8 +157,11 @@ namespace Horizon
 			bool alreadyExists = false;
 			for (uint32_t i = 1; i < s_V3Data.TextureSlotIndex; i++)
 			{
-				if (*s_V3Data.TextureSlots[i].get() == *texture.get())
+				// if ((*s_V3Data.TextureSlots[i].get() == *texture.get()) || (s_V3Data.TextureSlots[i].get()->GetPath() == texture.get()->GetPath()))
+				// I don't believe checking all textures for same id will work with 3d assimp imported texture
+				if ((texture.get()->HasPath()) && (s_V3Data.TextureSlots[i].get()->GetPath() == texture.get()->GetPath()))
 				{
+					//HZ_CORE_INFO(texture.get()->GetPath());
 					texIndex = (float)i;
 					alreadyExists = true;
 					break;
@@ -199,9 +177,7 @@ namespace Horizon
 			}
 		}
 
-		/////////////////////////////////////////////////////
 		/////////////  End textures  ////////////////////////
-		/////////////////////////////////////////////////////
 
 		for (const auto& mesh : meshes)
 		{

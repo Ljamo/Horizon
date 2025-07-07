@@ -18,9 +18,8 @@ namespace Horizon
 {
 	struct MaterialAudioProperties
 	{
-		float absorbtion[8] = {1.0f};
+		float absorbtion[8] = { 1.0f };
 		float scattering = 1.0f;
 		float transmission = 0.0f;
 	};
 }
-

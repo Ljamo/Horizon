@@ -25,6 +25,7 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\Resources\AudioTracer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\2D\Sandbox2D.cpp">
@@ -40,5 +41,6 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\Resources\AudioTracer.cpp" />
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ public:
 	Sandbox()
 	{
 		//PushLayer(new ExampleLayer());
-		PushLayer(new Sandbox3D());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox()

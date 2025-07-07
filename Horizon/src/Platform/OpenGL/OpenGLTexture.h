@@ -29,11 +29,15 @@ namespace Horizon {
 
 		const uint32_t GetRendererID() const { return m_RendererID; }
 
+		virtual bool HasPath() const override { return m_HasPath; }
+
 	private:
 		std::string m_Path;
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;
 		GLenum m_InternalFormat, m_DataFormat;
+
+		bool m_HasPath = true;
 	};
 
 }
