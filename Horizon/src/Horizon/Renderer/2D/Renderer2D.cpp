@@ -7,6 +7,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#define STATISTICS
+
 namespace Horizon
 {
 	struct PerVertex
@@ -21,9 +23,9 @@ namespace Horizon
 
 	struct Renderer2DData
 	{
-		const uint32_t MaxQuads = 10000;
-		const uint32_t MaxVertices = MaxQuads * 4;
-		const uint32_t MaxIndices = MaxQuads * 6;
+		static const uint32_t MaxQuads = 20000;
+		static const uint32_t MaxVertices = MaxQuads * 4;
+		static const uint32_t MaxIndices = MaxQuads * 6;
 		static const uint32_t MaxTextureSlots = 32;
 
 
@@ -39,12 +41,13 @@ namespace Horizon
 		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1; // 0 = White Texture
 
-		glm::vec4 QuadVertexPositions[4];
+		glm::vec4 QuadVertexPositions[4]{};
+
+		Renderer2D::Statistics Stats;
+
 	};
 
 	static Renderer2DData s_V2Data;
-
-
 
 	void Renderer2D::Init()
 	{
@@ -128,6 +131,17 @@ namespace Horizon
 		s_V2Data.TextureSlotIndex = 1;
 	}
 
+	void Renderer2D::FushAndReset()
+	{
+		EndScene();
+
+		s_V2Data.QuadIndexCount = 0;
+
+		s_V2Data.QuadVertexBufferPointer = s_V2Data.QuadVertexBufferBase;
+
+		s_V2Data.TextureSlotIndex = 1;
+	}
+
 	void Renderer2D::EndScene()
 	{
 		HZ_PROFILE_FUNCTION();
@@ -147,6 +161,7 @@ namespace Horizon
 			s_V2Data.TextureSlots[i]->Bind(i);
 		}
 		RenderCommand::DrawIndexed(s_V2Data.QuadVertexArray, s_V2Data.QuadIndexCount);
+		s_V2Data.Stats.DrawCalls++;
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
@@ -157,6 +172,11 @@ namespace Horizon
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		HZ_PROFILE_FUNCTION();
+
+		if (s_V2Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+		{
+			FushAndReset();
+		}
 
 		const float tilingFactor = 1.0f;
 		const float texIndex = 0.0f;
@@ -194,6 +214,7 @@ namespace Horizon
 		s_V2Data.QuadVertexBufferPointer++;
 
 		s_V2Data.QuadIndexCount += 6;
+		s_V2Data.Stats.QuadCount++;
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
@@ -204,6 +225,11 @@ namespace Horizon
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
 		HZ_PROFILE_FUNCTION();
+
+		if (s_V2Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+		{
+			FushAndReset();
+		}
 
 		float textureIndex = 0.0f;
 
@@ -258,7 +284,7 @@ namespace Horizon
 		s_V2Data.QuadVertexBufferPointer++;
 
 		s_V2Data.QuadIndexCount += 6;
-
+		s_V2Data.Stats.QuadCount++;
 	}
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, const float rotation, const glm::vec4& color)
@@ -268,6 +294,13 @@ namespace Horizon
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, const float rotation, const glm::vec4& color)
 	{
+		HZ_PROFILE_FUNCTION();
+
+		if (s_V2Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+		{
+			FushAndReset();
+		}
+
 		s_V2Data.TextureShader->SetFloat4("u_Color", color);
 		s_V2Data.WhiteTexture->Bind();
 
@@ -309,6 +342,7 @@ namespace Horizon
 		s_V2Data.QuadVertexBufferPointer++;
 
 		s_V2Data.QuadIndexCount += 6;
+		s_V2Data.Stats.QuadCount++;
 	}
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, const float rotation, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
@@ -319,6 +353,11 @@ namespace Horizon
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, const float rotation, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
 		HZ_PROFILE_FUNCTION();
+
+		if (s_V2Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+		{
+			FushAndReset();
+		}
 
 		float textureIndex = 0.0f;
 
@@ -375,6 +414,16 @@ namespace Horizon
 		s_V2Data.QuadVertexBufferPointer++;
 
 		s_V2Data.QuadIndexCount += 6;
+		s_V2Data.Stats.QuadCount++;
+	}
 
+	void Renderer2D::ResetStats()
+	{
+		memset(&s_V2Data.Stats, 0, sizeof(Statistics));
+	}
+
+	Renderer2D::Statistics Renderer2D::GetStats()
+	{
+		return s_V2Data.Stats;
 	}
 }

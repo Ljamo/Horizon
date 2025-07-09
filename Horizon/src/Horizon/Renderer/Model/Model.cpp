@@ -10,209 +10,148 @@
 
 namespace Horizon
 {
-    int Model::s_ModelIDCounter = 0;
 
-    void Model::LoadModel()
+    Object::Object(std::string path)
+        : m_Path(path)
+    {
+        ImportModels();
+    }
+
+    void Object::ImportModels()
     {
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(
-            m_Path,
-            aiProcess_Triangulate |
-            aiProcess_GenNormals |    // Generate normals if missing
-            // aiProcess_FlipUVs |       // Flip UVs for OpenGL
-            aiProcess_CalcTangentSpace // Required for normal maps
-        );
 
-        if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-        {
-            HZ_CORE_ERROR("Assimp Error: {0}", importer.GetErrorString());
+        const aiScene* scene = importer.ReadFile(m_Path,
+            aiProcess_CalcTangentSpace |
+            aiProcess_Triangulate |
+            aiProcess_JoinIdenticalVertices |
+            aiProcess_SortByPType |
+            aiProcess_GenNormals |
+            aiProcess_CalcTangentSpace);
+
+
+        // If the import failed, report it
+        if (!scene || !scene->mRootNode) {
+            HZ_CORE_ERROR(importer.GetErrorString());
             return;
         }
 
-        ProcessNode(scene->mRootNode, scene);
+        // Import models here
+        std::vector<aiNode*> modelNodes;
+        GetModelNodes(scene->mRootNode, modelNodes);
+
+        m_Models.clear();
+        m_Models.reserve(modelNodes.size());
+        HZ_CORE_INFO("Found {} models in file", modelNodes.size());
+
+        std::string path =
+            std::filesystem::path(m_Path).parent_path().string();
+
+        for (aiNode* nd : modelNodes)
+            m_Models.emplace_back(Model(nd, scene, path));
     }
 
-    void Model::ProcessNode(aiNode* node, const aiScene* scene)
+    void Object::GetModelNodes(aiNode* node, std::vector<aiNode*>& out)
     {
-        for (uint32_t i = 0; i < node->mNumMeshes; i++)
-        {
-            aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-            m_Meshes.push_back(ProcessMesh(mesh, scene));
-        }
-        for (uint32_t i = 0; i < node->mNumChildren; i++)
-        {
-            ProcessNode(node->mChildren[i], scene);
-        }
+        if (node->mNumMeshes > 0)
+            out.push_back(node);
+        for (uint32_t i = 0; i < node->mNumChildren; ++i)
+            GetModelNodes(node->mChildren[i], out);
     }
-
-    Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+  
+    void Model::LoadMesh(aiNode* node, const aiScene* scene)
     {
-        std::vector<Vertex> vertices;
-        std::vector<unsigned int> indices;
-        std::vector<Ref<Texture2D>> textures;
-
-        for (uint32_t i = 0; i < mesh->mNumVertices; i++)
+        for (uint32_t i = 0; i < node->mNumMeshes; ++i)
         {
-            Vertex vertex;
-            glm::vec3 vector;
-            // positions
-            vector.x = mesh->mVertices[i].x;
-            vector.y = mesh->mVertices[i].y;
-            vector.z = mesh->mVertices[i].z;
-            vertex.Position = vector;
-            // normals
-            if (mesh->HasNormals())
+            aiMesh* aimesh = scene->mMeshes[node->mMeshes[i]];
+            aiMaterial* aimaterial = scene->mMaterials[aimesh->mMaterialIndex];
+
+            std::vector<Vertex> vertices;
+            std::vector<uint32_t> indices;
+            // texture | texture path
+            std::vector<Ref<Texture2D>> textures;
+
+            vertices.reserve(aimesh->mNumVertices);
+            for (uint32_t v = 0; v < aimesh->mNumVertices; ++v)
             {
-                vector.x = mesh->mNormals[i].x;
-                vector.y = mesh->mNormals[i].y;
-                vector.z = mesh->mNormals[i].z;
-                vertex.Normal = vector;
+                Vertex vert;
+                vert.Position = glm::vec3(aimesh->mVertices[v].x, aimesh->mVertices[v].y, aimesh->mVertices[v].z);
+                vert.Normal = aimesh->HasNormals()
+                    ? glm::vec3(aimesh->mNormals[v].x, aimesh->mNormals[v].y, aimesh->mNormals[v].z)
+                    : glm::vec3(0.0f);
+
+                if (aimesh->mTextureCoords[0])
+                    vert.TexCoord = { aimesh->mTextureCoords[0][v].x,
+                                       aimesh->mTextureCoords[0][v].y };
+                else
+                    vert.TexCoord = glm::vec2(0.0f);
+
+                vertices.push_back(vert);
             }
 
-            // texture coordinates
-            if (mesh->mTextureCoords[0])
+            for (uint32_t f = 0; f < aimesh->mNumFaces; ++f)
             {
-                glm::vec2 vec;
-                vec.x = mesh->mTextureCoords[0][i].x;
-                vec.y = mesh->mTextureCoords[0][i].y;
-                vertex.TexCoord = vec;
+                for (uint32_t k = 0; k < aimesh->mFaces[f].mNumIndices; ++k)
+                {
+                    indices.push_back(aimesh->mFaces[f].mIndices[k]);
+                }
             }
-            else
-                vertex.TexCoord = glm::vec2(0.0f, 0.0f);
 
-            vertices.push_back(vertex);
+
+            auto diffuseMaps = LoadMaterialTextures(aimaterial, aiTextureType_DIFFUSE);
+            textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+
+            auto specularMaps = LoadMaterialTextures(aimaterial, aiTextureType_SPECULAR);
+            textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+
+            auto normalMaps = LoadMaterialTextures(aimaterial, aiTextureType_HEIGHT);
+            textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+
+            m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, textures));
+            
         }
 
-        for (unsigned int i = 0; i < mesh->mNumFaces; i++)
-        {
-            aiFace face = mesh->mFaces[i];
-            // retrieve all indices of the face and store them in the indices vector
-            for (unsigned int j = 0; j < face.mNumIndices; j++)
-                indices.push_back(face.mIndices[j]);
-        }
-        // process materials
-        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-        // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
-        // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER. 
-        // Same applies to other texture as the following list summarizes:
-        // diffuse: texture_diffuseN
-        // specular: texture_specularN
-        // normal: texture_normalN
 
-        // 1. diffuse maps
-        std::vector<Ref<Texture2D>> diffuseMaps = LoadMaterialTextures(
-            material, aiTextureType_DIFFUSE, "texture_diffuse", scene
-        );
-        textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-
-        // If no texture was loaded, create a default pink texture.
-        if (diffuseMaps.empty()) 
-        {
-            Ref<Texture2D> defaultTex = Texture2D::Create(1, 1);
-            uint32_t pink = 0xFFFF00FF; // RGBA pink
-            defaultTex->SetData(&pink, sizeof(uint32_t));
-            textures.push_back(defaultTex);
-        }
-        return Mesh(vertices, indices, textures);
+        // m_Mesh = std::make_shared<Mesh()>;
     }
 
-    std::vector<Ref<Texture2D>> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type,
-        const std::string& typeName, const aiScene* scene)
+    std::vector<Ref<Texture2D>> Model::LoadMaterialTextures(aiMaterial* mat,
+            aiTextureType type)
     {
-        // Get the number of textures for this type from the material
-        int textureCount = mat->GetTextureCount(type);
-        HZ_CORE_WARN("Material has {0} {1} texture(s)", textureCount, typeName);
         std::vector<Ref<Texture2D>> textures;
-
-        for (int i = 0; i < textureCount; i++)
+        uint32_t count = mat->GetTextureCount(type);
+        for (unsigned i = 0; i < count; ++i)
         {
             aiString str;
             mat->GetTexture(type, i, &str);
-            // Log the texture identifier from Assimp:
-            HZ_CORE_WARN("Texture identifier: {0}", str.C_Str());
-
-            // Check for embedded textures:
-            const aiTexture* embeddedTexture = scene->GetEmbeddedTexture(str.C_Str());
-            if (embeddedTexture)
-            {
-                if (embeddedTexture->mHeight == 0)
-                {
-                    try {
-                        Ref<Texture2D> texture = Texture2D::CreateFromMemory(
-                            reinterpret_cast<unsigned char*>(embeddedTexture->pcData),
-                            embeddedTexture->mWidth);
-                        textures.push_back(texture);
-                        m_LoadedTextures.push_back(texture);
-                        continue; // Continue to next texture if this one is embedded
-                    }
-                    catch (...)
-                    {
-                        HZ_CORE_ERROR("Failed to load embedded texture: {0}", str.C_Str());
-                    }
-                }
-            }
-
-            bool skip = false;
-
-            // Adjust the texture identifier if an unwanted folder prefix is present.
-            std::string textureIdentifier = str.C_Str();
-            const std::string folderPrefix = "Ico.fbm\\";
-            if (textureIdentifier.find(folderPrefix) == 0)
-            {
-                textureIdentifier = textureIdentifier.substr(folderPrefix.length());
-            }
-
-            // Construct full path for the texture file.
-            std::filesystem::path texturePath = std::filesystem::path(m_Path).parent_path() / textureIdentifier;
-            std::string fullPath = texturePath.string();
-
-            // Log out the texture search path.
-            HZ_CORE_WARN("Looking for texture at: {0}", fullPath);
-
-            // Verify existence of the file
-            if (std::filesystem::exists(fullPath))
-            {
-                HZ_CORE_INFO("Texture file exists at: {0}", fullPath);
-            }
-            else
-            {
-                HZ_CORE_ERROR("Texture file NOT found at: {0}", fullPath);
-            }
-
-            // Check if the texture was already loaded.
-            for (uint32_t j = 0; j < m_LoadedTextures.size(); j++)
-            {
-                if (m_LoadedTextures[j]->GetPath() == fullPath)
-                {
-                    textures.push_back(m_LoadedTextures[j]);
-                    skip = true;
-                    break;
-                }
-            }
-
-            if (!skip)
-            {
-                try {
-                    Ref<Texture2D> texture = Texture2D::Create(fullPath);
-                    textures.push_back(texture);
-                    m_LoadedTextures.push_back(texture);
-                }
-                catch (...)
-                {
-                    HZ_CORE_ERROR("Failed to load texture: {0}", fullPath);
-                }
-            }
+            std::string filename = str.C_Str();
+            std::string fullPath = m_Path + "/" + filename;
+            textures.push_back(Texture2D::Create(fullPath));
         }
         return textures;
     }
 
-    void Model::UpdateModelMatrix()
+    Mesh::Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices,
+        std::vector<Ref<Texture2D>> textures)
     {
-        m_ModelMatrix = glm::mat4(1.0f);
-        m_ModelMatrix = glm::translate(m_ModelMatrix, m_Position);
-        m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-        m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-        m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-        m_ModelMatrix = glm::scale(m_ModelMatrix, m_Scale);
+        SetVertices(vertices);
+        SetIndices(indices);
+        SetTextures(textures);
     }
+
+    void Mesh::SetVertices(std::vector<Vertex> vertices)
+    {
+        m_Vertices = std::move(vertices);
+    }
+
+    void Mesh::SetIndices(std::vector<uint32_t> indices)
+    {
+        m_Indices = std::move(indices);
+    }
+
+    void Mesh::SetTextures(std::vector<Ref<Texture2D>> textures)
+    {
+        m_LoadedTextures = std::move(textures);
+    }
+
 }

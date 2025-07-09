@@ -7,10 +7,10 @@
 namespace Horizon {
 
 	PerspectiveCameraController::PerspectiveCameraController(float aspectRatio, float fov, bool rotation)
-		: m_AspectRatio(aspectRatio), m_FOV(fov), m_Camera(fov, aspectRatio, 0.1f, 100.0f, m_CameraPosition, m_CameraRotation), m_Rotation(rotation)
+		: m_AspectRatio(aspectRatio), m_FOV(fov), m_Camera(fov, aspectRatio, 0.1f, 1500.0f, m_CameraPosition, m_CameraRotation), m_Rotation(rotation)
 	{
 		// HZ_CORE_INFO("m_Camera should be created");
-		m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 100.0f);
+		m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 1500.0f);
 		// HZ_CORE_INFO("Set projection");
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
@@ -89,7 +89,7 @@ namespace Horizon {
 	bool PerspectiveCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-		m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 100.0f);
+		m_Camera.SetProjection(m_FOV, m_AspectRatio, 0.1f, 1500.0f);
 		return false;
 	}
 

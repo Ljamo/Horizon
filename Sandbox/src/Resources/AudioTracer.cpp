@@ -37,8 +37,9 @@ void AudioTracer::TraceRays()
 Ray AudioTracer::TraceAudioRay(const glm::vec3& origin, const glm::vec3& direction)
 {
 	Ray audioRay;
+	return audioRay;
 
-
+	/*
 	// TODO implement BVH for more efficient tracing
 	for (const auto& model : m_Models)
 	{
@@ -60,23 +61,30 @@ Ray AudioTracer::TraceAudioRay(const glm::vec3& origin, const glm::vec3& directi
 	}
 
 	return audioRay;
+	*/
 }
 
 bool AudioTracer::CheckTriHit(const glm::vec3& origin, const glm::vec3& dir, const Horizon::Mesh& mesh, glm::vec3& hitPos)
 {
+	return false;
+	/*
 	bool hit = false;
 	std::vector<Horizon::Vertex> verts = mesh.m_Vertices;
 	float closestHit;
 
 	return hit;
+	*/
 }
 
 glm::vec3 AudioTracer::CalculateNormalFromVerts(const Horizon::Mesh& mesh)
 {
-	std::vector<Horizon::Vertex> verts = mesh.m_Vertices;
+	return glm::vec3(1.0f);
+	/*
+	std::vector<Horizon::Vertex> verts = mesh.GetVertices();
 
 	glm::vec3 edge1 = verts[1].Position - verts[0].Position;
 	glm::vec3 edge2 = verts[2].Position - verts[0].Position;
 	glm::vec3 normal = glm::normalize(glm::cross(edge1, edge2));
 	return normal;
+	*/
 }

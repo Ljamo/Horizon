@@ -24,6 +24,7 @@ namespace Horizon {
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 		//m_Window->SetVSync(0);
 
+		// m_Window->SetCulling(true);
 		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();

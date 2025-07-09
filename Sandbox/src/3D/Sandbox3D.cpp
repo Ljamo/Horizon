@@ -22,15 +22,15 @@ void Sandbox3D::OnAttach()
 	std::string path3 = "assets/models/Roof.fbx";
 	std::string path = "assets/models/Floor.fbx";
 	std::string path2 = "assets/models/Walls.fbx";
+	std::string path4 = "assets/models/dragon_low.fbx";
+	std::string sponza = "assets/models/sponza/sponza.obj";
 	// Horizon::Model m_BaseModel(path);
-	m_BaseModel = Horizon::CreateRef<Horizon::Model>(path);
-	m_BaseModel2 = Horizon::CreateRef<Horizon::Model>(path2);
-	m_BaseModel3 = Horizon::CreateRef<Horizon::Model>(path3);
-	// m_BaseModel2->SetPosition(glm::vec3(2.0f));
-	m_BaseModel->SetRotation(glm::vec3(-90.0f, 0.0f, 180.0f));
-	m_BaseModel2->SetRotation(glm::vec3(-90.0f, 0.0f, 180.0f));
-	m_BaseModel3->SetRotation(glm::vec3(-90.0f, 0.0f, 180.0f));
-	// m_BaseModel->LoadModel();
+	// m_BaseModel = Horizon::CreateRef<Horizon::Object>(path);
+	// m_BaseModel2 = Horizon::CreateRef<Horizon::Object>(path2);
+	// m_BaseModel3 = Horizon::CreateRef<Horizon::Object>(path3);
+	m_BaseModel4 = Horizon::CreateRef<Horizon::Object>(path4);
+	m_Sponza = Horizon::CreateRef<Horizon::Object>(sponza);
+
 }
 
 void Sandbox3D::OnDetach()
@@ -51,6 +51,7 @@ void Sandbox3D::OnUpdate(Horizon::Timestep ts)
 	}
 
 	// Render
+	Horizon::Renderer3D::ResetStats();
 	{
 		HZ_PROFILE_SCOPE("Renderer Prep");
 		Horizon::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -70,9 +71,11 @@ void Sandbox3D::OnUpdate(Horizon::Timestep ts)
 		Horizon::Renderer3D::BeginScene(m_CameraController.GetCamera());
 		{
 			PROFILE_SCOPE("Sandbox3D::DrawMesh");
-			Horizon::Renderer3D::DrawMesh(m_BaseModel);
-			Horizon::Renderer3D::DrawMesh(m_BaseModel2);
-			Horizon::Renderer3D::DrawMesh(m_BaseModel3);
+			// Horizon::Renderer3D::DrawObject(m_BaseModel, glm::vec3(0.0f), m_Rotation, glm::vec3(1.0f));
+			// Horizon::Renderer3D::DrawObject(m_BaseModel2, glm::vec3(0.0f), m_Rotation, glm::vec3(1.0f));
+			// Horizon::Renderer3D::DrawObject(m_BaseModel3, glm::vec3(0.0f), m_Rotation, glm::vec3(1.0f));
+			Horizon::Renderer3D::DrawObject(m_BaseModel4, m_DragonPosition, m_DragonRotation, m_DragonScale);
+			// Horizon::Renderer3D::DrawObject(m_Sponza, glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
 			// Horizon::Renderer3D::DrawMesh(m_BaseModel, glm::vec3(-1.0f, -1.0f);
 		}
 
@@ -102,6 +105,19 @@ void Sandbox3D::OnImGuiRender()
 	
 	ImGui::Text("Test");
 
+	auto stats = Horizon::Renderer3D::GetStats();
+	ImGui::Text("Renderer3D Stats:");
+	ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+	ImGui::Text("Mesh Count: %d", stats.GetTotalMeshCount());
+	ImGui::Text("Vertices Count: %d", stats.GetTotalVertexCount());
+	ImGui::Text("Indices Count: %d", stats.GetTotalIndexCount());
+
+	// ImGui::SliderFloat3("Mesh Rotation", &m_Rotation.x, -180.0f, 180.0f);
+	ImGui::SliderFloat3("Dragon Rotaton", &m_DragonRotation.x, -180.0f, 180.0f);
+	ImGui::SliderFloat3("Dragon Position", &m_DragonPosition.x, -200.0f, 200.0f);
+	ImGui::SliderFloat3("Dragon Scale", &m_DragonScale.x, 0.01f, 0.5f);
+
+	// ImGui::Checkbox("Enable Backface Culling", &)
 
 	ImGui::End();
 
@@ -128,6 +144,7 @@ void Sandbox3D::OnImGuiRender()
 			i++;
 		}
 	}
+
 	ImGui::End();
 
 }

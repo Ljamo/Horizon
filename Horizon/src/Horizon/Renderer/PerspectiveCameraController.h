@@ -56,7 +56,7 @@ namespace Horizon
 		glm::vec3 m_CameraRotation = { 0.0f, -90.0f, 0.0f }; // Yaw, pitch, roll rotation
 
 		// Movement and rotation speeds
-		float m_CameraTranslationSpeed = 25.0f; // Units per second
+		float m_CameraTranslationSpeed = 250.0f; // Units per second
 		float m_CameraRotationSpeed = 180.0f;  // Degrees per second
 	};
 }
