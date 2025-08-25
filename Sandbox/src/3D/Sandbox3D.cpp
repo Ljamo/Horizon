@@ -29,7 +29,7 @@ void Sandbox3D::OnAttach()
 	// m_BaseModel2 = Horizon::CreateRef<Horizon::Object>(path2);
 	// m_BaseModel3 = Horizon::CreateRef<Horizon::Object>(path3);
 	m_BaseModel4 = Horizon::CreateRef<Horizon::Object>(path4);
-	m_Sponza = Horizon::CreateRef<Horizon::Object>(sponza);
+	//m_Sponza = Horizon::CreateRef<Horizon::Object>(sponza);
 
 }
 

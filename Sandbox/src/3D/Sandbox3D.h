@@ -27,7 +27,7 @@ private:
 	glm::vec3 m_Rotation = glm::vec3(-90.0f, 180.0f, 0.0f);
 	glm::vec3 m_DragonPosition = glm::vec3(35.0f, 6.6f, 7.0f);
 	glm::vec3 m_DragonRotation = glm::vec3(-90.0f, 180.0f, 0.0f);
-	glm::vec3 m_DragonScale = glm::vec3(0.07f);
+	glm::vec3 m_DragonScale = glm::vec3(5.0f);
 	//Horizon::Model m_BaseModel;
 
 	Horizon::Ref<Horizon::VertexArray> m_CubeVA;

@@ -143,9 +143,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Audio\AudioData.h" />
     <ClInclude Include="src\Horizon\Audio\MaterialProperties.h" />
-    <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Core\Application.h" />
     <ClInclude Include="src\Horizon\Core\Core.h" />
     <ClInclude Include="src\Horizon\Core\EntryPoint.h" />
@@ -165,6 +165,7 @@
     <ClInclude Include="src\Horizon\Events\MouseEvent.h" />
     <ClInclude Include="src\Horizon\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Horizon\Renderer\2D\Renderer2D.h" />
+    <ClInclude Include="src\Horizon\Renderer\3D\RayRenderer.h" />
     <ClInclude Include="src\Horizon\Renderer\3D\Renderer3D.h" />
     <ClInclude Include="src\Horizon\Renderer\Buffer.h" />
     <ClInclude Include="src\Horizon\Renderer\GraphicsContext.h" />
@@ -618,6 +619,7 @@
     <ClCompile Include="src\Horizon\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Horizon\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Horizon\Renderer\2D\Renderer2D.cpp" />
+    <ClCompile Include="src\Horizon\Renderer\3D\RayRenderer.cpp" />
     <ClCompile Include="src\Horizon\Renderer\3D\Renderer3D.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Horizon\Renderer\Model\Model.cpp" />

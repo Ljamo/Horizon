@@ -37,4 +37,22 @@ namespace Horizon {
 		uint32_t m_Count;
 	};
 
+	class OpenGLStorageBuffer : public StorageBuffer
+	{
+	public:
+		~OpenGLStorageBuffer();
+
+		OpenGLStorageBuffer();
+
+		virtual void Bind() const;
+		virtual void Unbind() const;
+
+		virtual void SetData(const void* data, uint32_t size) override;
+
+	private:
+		uint32_t m_RendererID;
+		uint32_t m_Size;
+		uint32_t m_LayoutID;
+	};
+
 }

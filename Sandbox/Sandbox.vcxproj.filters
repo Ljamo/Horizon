@@ -15,8 +15,14 @@
     <ClInclude Include="src\2D\Sandbox2D.h">
       <Filter>2D</Filter>
     </ClInclude>
+    <ClInclude Include="src\3D\RayRendering.h">
+      <Filter>3D</Filter>
+    </ClInclude>
     <ClInclude Include="src\3D\Sandbox3D.h">
       <Filter>3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\AudioTracer.h">
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Resources\ParticleSystem.h">
       <Filter>Resources</Filter>
@@ -25,14 +31,19 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Timer.h" />
-    <ClInclude Include="src\Resources\AudioTracer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\2D\Sandbox2D.cpp">
       <Filter>2D</Filter>
     </ClCompile>
+    <ClCompile Include="src\3D\RayRendering.cpp">
+      <Filter>3D</Filter>
+    </ClCompile>
     <ClCompile Include="src\3D\Sandbox3D.cpp">
       <Filter>3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\AudioTracer.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Resources\ParticleSystem.cpp">
       <Filter>Resources</Filter>
@@ -41,6 +52,5 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
-    <ClCompile Include="src\Resources\AudioTracer.cpp" />
   </ItemGroup>
 </Project>

@@ -32,6 +32,11 @@ namespace Horizon {
 			s_RendererAPI->DrawIndexed(vertexArray, count);
 		}
 
+		inline static void DrawByGPU(uint32_t numTris)
+		{
+			s_RendererAPI->DrawByGPU(numTris);
+		}
+
 	private:
 		static RendererAPI* s_RendererAPI;
 	};

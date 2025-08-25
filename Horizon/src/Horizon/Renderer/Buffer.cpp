@@ -6,11 +6,13 @@
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Horizon {
+	uint32_t StorageBuffer::StorageLayoutCount = 1;
+
 	Ref<VertexBuffer> VertexBuffer::Create(uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoter!");  return nullptr;
+		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoted!");  return nullptr;
 		case RendererAPI::API::OpenGL:    return CreateRef<OpenGLVertexBuffer>(size);
 		}
 
@@ -22,7 +24,7 @@ namespace Horizon {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoter!");  return nullptr;
+		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoted!");  return nullptr;
 		case RendererAPI::API::OpenGL:    return CreateRef<OpenGLVertexBuffer>(vertices, size);
 		}
 
@@ -34,7 +36,7 @@ namespace Horizon {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoter!");  return nullptr;
+		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoted!");  return nullptr;
 		case RendererAPI::API::OpenGL:    return CreateRef<OpenGLIndexBuffer>(indices, count);
 		}
 
@@ -42,5 +44,17 @@ namespace Horizon {
 		return nullptr;
 	}
 
+
+	Ref<StorageBuffer> StorageBuffer::Create()
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:      HZ_CORE_ASSERT(false, "RendererAPI::None is currently not suppoted!");  return nullptr;
+		case RendererAPI::API::OpenGL:    return CreateRef<OpenGLStorageBuffer>();
+		}
+
+		HZ_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
+	}
 
 }

@@ -15,7 +15,7 @@ namespace Horizon {
 
 		enum class Dimension
 		{
-			_2D = 2, _3D = 3
+			_2D = 2, _3D = 3, _ALT = 4
 		};
 
 	public:
@@ -25,6 +25,7 @@ namespace Horizon {
 		virtual void Clear() = 0;
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
+		virtual void DrawByGPU(uint32_t numTris) = 0;
 
 		inline static API GetAPI() { return s_API; }
 		inline static Dimension GetDimension() { return s_Dimension; }

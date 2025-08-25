@@ -7,6 +7,9 @@
     <Filter Include="src\Horizon">
       <UniqueIdentifier>{85E491BE-F199-0AB4-7A8E-048BE64201B8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Horizon\Audio">
+      <UniqueIdentifier>{4602EBF5-B218-E98B-FB8F-74AD67E5B913}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Horizon\Core">
       <UniqueIdentifier>{FDA31793-E99C-36E5-12CF-1B6AFE2616F1}</UniqueIdentifier>
     </Filter>
@@ -69,6 +72,12 @@
     <ClInclude Include="src\Horizon.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Horizon\Audio\AudioData.h">
+      <Filter>src\Horizon\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Audio\MaterialProperties.h">
+      <Filter>src\Horizon\Audio</Filter>
+    </ClInclude>
     <ClInclude Include="src\Horizon\Core\Application.h">
       <Filter>src\Horizon\Core</Filter>
     </ClInclude>
@@ -125,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\2D\Renderer2D.h">
       <Filter>src\Horizon\Renderer\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Horizon\Renderer\3D\RayRenderer.h">
+      <Filter>src\Horizon\Renderer\3D</Filter>
     </ClInclude>
     <ClInclude Include="src\Horizon\Renderer\3D\Renderer3D.h">
       <Filter>src\Horizon\Renderer\3D</Filter>
@@ -1452,10 +1464,14 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Horizon\Audio\MaterialProperties.h" />
-    <ClInclude Include="src\Horizon\Audio\AudioData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Horizon\Audio\AudioData.cpp">
+      <Filter>src\Horizon\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Audio\MaterialProperties.cpp">
+      <Filter>src\Horizon\Audio</Filter>
+    </ClCompile>
     <ClCompile Include="src\Horizon\Core\Application.cpp">
       <Filter>src\Horizon\Core</Filter>
     </ClCompile>
@@ -1476,6 +1492,9 @@
     </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\2D\Renderer2D.cpp">
       <Filter>src\Horizon\Renderer\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Horizon\Renderer\3D\RayRenderer.cpp">
+      <Filter>src\Horizon\Renderer\3D</Filter>
     </ClCompile>
     <ClCompile Include="src\Horizon\Renderer\3D\Renderer3D.cpp">
       <Filter>src\Horizon\Renderer\3D</Filter>
@@ -1546,7 +1565,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Horizon\Audio\MaterialProperties.cpp" />
-    <ClCompile Include="src\Horizon\Audio\AudioData.cpp" />
   </ItemGroup>
 </Project>

@@ -85,7 +85,7 @@ namespace Horizon {
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
 
-
+			// TODO Need to see why failure occurs when minimised
 			m_Window->OnUpdate();
 		}
 	}

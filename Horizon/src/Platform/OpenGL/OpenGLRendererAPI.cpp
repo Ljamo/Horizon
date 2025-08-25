@@ -37,4 +37,9 @@ namespace Horizon {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
+	void OpenGLRendererAPI::DrawByGPU(uint32_t numTris)
+	{
+		glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
+	}
+
 }

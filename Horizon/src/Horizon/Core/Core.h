@@ -34,6 +34,8 @@
 
 #define HZ_SET_2D() Horizon::Renderer::SetDimension(Horizon::RendererAPI::Dimension::_2D)
 #define HZ_SET_3D() Horizon::Renderer::SetDimension(Horizon::RendererAPI::Dimension::_3D)
+#define HZ_SET_ALT() Horizon::Renderer::SetDimension(Horizon::RendererAPI::Dimension::_ALT)
+
 
 namespace Horizon {
 

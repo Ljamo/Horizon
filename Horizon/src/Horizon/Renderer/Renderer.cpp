@@ -4,6 +4,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "2D/Renderer2D.h"
 #include "3D/Renderer3D.h"
+#include "3D/RayRenderer.h"
 
 namespace Horizon {
 
@@ -12,6 +13,7 @@ namespace Horizon {
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		
 		switch (RendererAPI::GetDimension())
 		{
 			case RendererAPI::Dimension::_2D:
@@ -26,9 +28,15 @@ namespace Horizon {
 				//HZ_INFO("Initialized Renderer3D.");
 				break;
 			}
+			case RendererAPI::Dimension::_ALT:
+			{
+				RayRenderer::Init();
+				//HZ_INFO("Initialized Renderer3D.");
+				break;
+			}
 			default:
 			{
-				HZ_ERROR("No Game Dimension was chosen.");
+				HZ_ERROR("No correct renderer dimension was chosen.");
 				break;
 			}
 		}
@@ -47,6 +55,13 @@ namespace Horizon {
 			case RendererAPI::Dimension::_3D:
 			{
 				Renderer3D::Shutdown();
+				//HZ_INFO("Shutdown Renderer3D.");
+				break;
+
+			}
+			case RendererAPI::Dimension::_ALT:
+			{
+				RayRenderer::Shutdown();
 				//HZ_INFO("Shutdown Renderer3D.");
 				break;
 			}

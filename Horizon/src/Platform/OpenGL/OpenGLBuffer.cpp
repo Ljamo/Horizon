@@ -1,5 +1,6 @@
 #include "hzpch.h"
 #include "OpenGLBuffer.h"
+#include <algorithm>
 
 #include <glad/glad.h>
 
@@ -75,6 +76,45 @@ namespace Horizon {
 	void OpenGLIndexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	
+
+	OpenGLStorageBuffer::OpenGLStorageBuffer()
+	{
+		glGenBuffers(1, &m_RendererID);
+		m_Size = 0;
+		m_LayoutID = StorageBuffer::StorageLayoutCount;
+		StorageBuffer::StorageLayoutCount++;
+	}
+
+	void OpenGLStorageBuffer::Bind() const
+	{
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_LayoutID, m_RendererID);
+	}
+
+	void OpenGLStorageBuffer::Unbind() const
+	{
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_LayoutID, 0);
+	}
+
+	OpenGLStorageBuffer::~OpenGLStorageBuffer()
+	{
+		glDeleteBuffers(1, &m_RendererID);
+	}
+
+	void OpenGLStorageBuffer::SetData(const void* data, uint32_t size)
+	{
+		// If data is too big, resize it
+		if (size > m_Size)
+		{
+			m_Size = std::max(size, m_Size * 2);
+			glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_RendererID);
+			glBufferData(GL_SHADER_STORAGE_BUFFER, m_Size, nullptr, GL_DYNAMIC_DRAW);
+		}
+
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_RendererID);
+		glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, size, data);
 	}
 
 }

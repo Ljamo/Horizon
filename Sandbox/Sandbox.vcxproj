@@ -134,17 +134,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Resources\AudioTracer.h" />
     <ClInclude Include="src\2D\Sandbox2D.h" />
+    <ClInclude Include="src\3D\RayRendering.h" />
     <ClInclude Include="src\3D\Sandbox3D.h" />
+    <ClInclude Include="src\Resources\AudioTracer.h" />
     <ClInclude Include="src\Resources\ParticleSystem.h" />
     <ClInclude Include="src\Resources\Random.h" />
     <ClInclude Include="src\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Resources\AudioTracer.cpp" />
     <ClCompile Include="src\2D\Sandbox2D.cpp" />
+    <ClCompile Include="src\3D\RayRendering.cpp" />
     <ClCompile Include="src\3D\Sandbox3D.cpp" />
+    <ClCompile Include="src\Resources\AudioTracer.cpp" />
     <ClCompile Include="src\Resources\ParticleSystem.cpp" />
     <ClCompile Include="src\Resources\Random.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
