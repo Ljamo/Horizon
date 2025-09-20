@@ -24,6 +24,8 @@ void RayRendering::OnAttach()
 	// Upload to GPU
 	m_GPUDataBuffer->SetData(m_Spheres.data(), (uint32_t)(m_Spheres.size() * sizeof(Sphere)));
 	m_GPUDataBuffer->Bind();
+
+
 }
 
 void RayRendering::OnDetach()
@@ -50,12 +52,7 @@ void RayRendering::OnUpdate(Horizon::Timestep ts)
 	}
 
 
-	{
-		Horizon::RayRenderer::BeginScene(m_CameraController.GetCamera());
-		
-
-		//Horizon::RayRenderer::EndScene();
-	}
+	Horizon::RayRenderer::BeginScene(m_CameraController.GetCamera(), m_App.GetDimensions());
 }
 
 void RayRendering::OnImGuiRender()

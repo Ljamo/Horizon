@@ -35,6 +35,8 @@ private:
 		float _pad; // padding for std430 alignment
 	};
 
+	Horizon::Application& m_App = Horizon::Application::Get();
+
 
 	std::vector<Sphere> m_Spheres;
 

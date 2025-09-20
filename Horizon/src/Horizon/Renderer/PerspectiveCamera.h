@@ -30,6 +30,7 @@ namespace Horizon {
 		glm::vec3 GetUp() const;
 		glm::vec3 GetWorldUp() const;
 
+		const float GetFOV() const { return m_FOV; }
 	private:
 		void RecalculateViewMatrix();
 		void RecalculateProjectionMatrix();

@@ -50,6 +50,7 @@ namespace Horizon
 		s_RayRenderData.QuadVertexBuffer = VertexBuffer::Create(sizeof(s_RayRenderData.QuadVertices));
 		s_RayRenderData.QuadVertexBuffer->SetLayout({
 			{ ShaderDataType::Float2, "a_Position" }
+			//{ ShaderDataType::Float, "a_AspectRatio" }
 			});
 		s_RayRenderData.QuadVertexArray->AddVertexBuffer(s_RayRenderData.QuadVertexBuffer);
 
@@ -70,10 +71,12 @@ namespace Horizon
 
 	}
 
-	void RayRenderer::BeginScene(const PerspectiveCamera& camera)
+	void RayRenderer::BeginScene(const PerspectiveCamera& camera, glm::vec2 dimensions)
 	{
 		s_RayRenderData.RayShader->Bind();
 		s_RayRenderData.ViewProjection = camera.GetViewProjectionMatrix();
+		s_RayRenderData.RayShader->SetFloat("u_AspectRatio", camera.GetFOV());
+		s_RayRenderData.RayShader->SetFloat2("u_Dimensions", dimensions);
 		EndScene();
 	}
 

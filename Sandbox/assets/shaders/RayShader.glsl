@@ -3,11 +3,18 @@
 
 layout(location = 0) in vec2 a_Position;
 out vec2 v_TexCoord;
+out float v_AspectRatio;
+out vec2 v_Dimensions;
+
+uniform float u_AspectRatio;
+uniform vec2 u_Dimensions;
 
 void main()
 {
     gl_Position = vec4(a_Position, 0.0, 1.0);
     v_TexCoord = (a_Position + 1.0) * 0.5; // 0..1 texcoords
+    v_AspectRatio = u_AspectRatio;
+    v_Dimensions = u_Dimensions;
 }
 
 #type fragment
@@ -15,6 +22,8 @@ void main()
 
 out vec4 FragColor;
 in vec2 v_TexCoord;
+in float v_AspectRatio;
+in vec2 v_Dimensions;
 
 struct Sphere {
     vec3 center;
@@ -23,48 +32,37 @@ struct Sphere {
     float _pad; // padding for std430 alignment
 };
 
+struct ray
+{
+    vec3 origin;
+    vec3 direction;
+};
+
 layout(std430, binding = 1) buffer Spheres {
     Sphere spheres[];
 };
 
 vec3 camPos = vec3(0.0, 0.0, 0.0);
+float focalLength = 1.0f;
 
-// ray–sphere intersection
-bool intersectSphere(vec3 ro, vec3 rd, Sphere s, out float t)
+vec3 CastRay(vec3 o, vec3 d, float t)
 {
-    vec3 oc = ro - s.center;
-    float b = dot(oc, rd);
-    float c = dot(oc, oc) - s.radius * s.radius;
-    float h = b * b - c;
-    if (h < 0.0) return false;
-    h = sqrt(h);
-    t = -b - h;
-    if (t < 0.0) t = -b + h;
-    return t > 0.0;
+    //return o + t * d;
+
+
 }
 
 void main()
 {
-    // generate ray
-    vec2 ndc = v_TexCoord * 2.0 - 1.0;
-    vec3 ro = camPos;
-    vec3 rd = normalize(vec3(ndc, -1.0));
+    vec2 coordinate = gl_FragCoord.xy;
 
-    float tClosest = 1e20;
-    vec3 finalColor = vec3(0.0);
+    vec2 pixelDelta = vec2(1.0) / v_Dimensions;
 
-    for (int i = 0; i < spheres.length(); i++)
-    {
-        float t;
-        if (intersectSphere(ro, rd, spheres[i], t) && t < tClosest)
-        {
-            tClosest = t;
-            vec3 hitPos = ro + rd * t;
-            vec3 n = normalize(hitPos - spheres[i].center);
-            float diff = max(dot(n, normalize(vec3(1.0, 1.0, -1.0))), 0.0);
-            finalColor = spheres[i].color * diff;
-        }
-    }
+    vec3 blue = vec3(0.44, 0.71, 0.84);
+    vec3 white = vec3(0.8, 0.8, 1.0);
 
-    FragColor = vec4(finalColor, 1.0);
+    vec3 color = mix(white, blue, v_TexCoord.y);
+
+
+    FragColor = vec4(color, 1.0);
 }
