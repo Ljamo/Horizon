@@ -71,12 +71,15 @@ namespace Horizon
 
 	}
 
-	void RayRenderer::BeginScene(const PerspectiveCamera& camera, glm::vec2 dimensions)
+	void RayRenderer::BeginScene(const PerspectiveCamera& camera, glm::vec2 dimensions, float time)
 	{
 		s_RayRenderData.RayShader->Bind();
 		s_RayRenderData.ViewProjection = camera.GetViewProjectionMatrix();
-		s_RayRenderData.RayShader->SetFloat("u_AspectRatio", camera.GetFOV());
+		s_RayRenderData.RayShader->SetFloat("u_AspectRatio", camera.GetAspectRatio());
+		s_RayRenderData.RayShader->SetFloat("u_Time", time);
 		s_RayRenderData.RayShader->SetFloat2("u_Dimensions", dimensions);
+		s_RayRenderData.RayShader->SetMat4("u_InverseProj", camera.GetInverseProjection());
+		s_RayRenderData.RayShader->SetMat4("u_InverseView", camera.GetInverseView());
 		EndScene();
 	}
 

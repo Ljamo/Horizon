@@ -61,8 +61,8 @@ namespace Horizon {
 
 		}
 
-		if (Input::IsMouseButtonPressed(1))
-			HZ_CORE_WARN("Mouse Pressed");
+		// if (Input::IsMouseButtonPressed(1))
+		// 	HZ_CORE_WARN("Mouse Pressed");
 
 		
 

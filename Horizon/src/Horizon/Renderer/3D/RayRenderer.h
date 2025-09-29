@@ -19,7 +19,7 @@ namespace Horizon
 		static void Init();
 		static void Shutdown();
 
-		static void BeginScene(const PerspectiveCamera& camera, glm::vec2 dimensions);
+		static void BeginScene(const PerspectiveCamera& camera, glm::vec2 dimensions, float time);
 		static void EndScene();
 		static void DrawScreenQuad();
 

@@ -29,4 +29,5 @@
 
 #include "Horizon/Renderer/OrthographicCamera.h"
 #include "Horizon/Renderer/PerspectiveCamera.h"
+#include "Horizon/Renderer/RayTracingCamera.h"
 // -----------------------------------
