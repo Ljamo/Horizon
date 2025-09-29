@@ -10,7 +10,7 @@
 #include <Horizon/Renderer/3D/RayRenderer.cpp>
 
 RayRendering::RayRendering()
-	: Layer("RayRendering"), m_CameraController(1280.0f / 720.0f, 75.0f, true)
+	: Layer("RayRendering"), m_CameraController(1280.0f / 720.0f, 75.0f)
 {
 	// HZ_TRACE("Created Sandbox3D");
 	HZ_SET_ALT();
@@ -18,12 +18,22 @@ RayRendering::RayRendering()
 
 void RayRendering::OnAttach()
 {
-	m_Spheres.push_back({ glm::vec3(0.0, 0.0, -3.0), 1.0f, glm::vec3(1,0,0), 0.0f });
-	m_Spheres.push_back({ glm::vec3(2,1,0), 0.5f, glm::vec3(0,1,0), 0.0f });
+	m_Spheres.push_back({ glm::vec3(0.0, 0.0, 0), 0.5f, glm::vec3(1,0,1), 0.2f });
+	m_Spheres.push_back({ glm::vec3(0.0, 1.0, -5.0), 3.0f, glm::normalize(glm::vec3(51,77,255)), 0.2f });
+	m_Spheres.push_back({ glm::vec3(0.0, -10.0, -3.0 + 18.0f), 9.0f, glm::vec3(0,1,0), 0.2f });
+	m_Spheres.push_back({ glm::vec3(-2.0f, 0.0f, -4.0f), 1.0f, glm::vec3(1,1,0), 0.2f }); // yellow left
+	m_Spheres.push_back({ glm::vec3(2.0f, 0.0f, -4.0f), 1.0f, glm::vec3(0,1,1), 0.2f });  // cyan right
+	m_Spheres.push_back({ glm::vec3(0.0f, 2.0f, -5.0f), 1.0f, glm::vec3(1,0,1), 0.2f });  // magenta top
+	m_Spheres.push_back({ glm::vec3(0.0f, -1.5f, -2.0f), 0.5f, glm::vec3(1,1,1), 0.2f }); // small white near bottom
+	m_Spheres.push_back({ glm::vec3(-3.0f, -9.0f, 0.0f), 8.0f, glm::vec3(0.5f,0.25f,0.0f), 0.2f }); // big brown ground offset
+	
+	//m_Spheres.push_back({ glm::vec3(2,1,0), 0.5f, glm::vec3(0,1,0), 0.0f });
 
 	// Upload to GPU
 	m_GPUDataBuffer->SetData(m_Spheres.data(), (uint32_t)(m_Spheres.size() * sizeof(Sphere)));
 	m_GPUDataBuffer->Bind();
+
+
 }
 
 void RayRendering::OnDetach()
@@ -50,12 +60,8 @@ void RayRendering::OnUpdate(Horizon::Timestep ts)
 	}
 
 
-	{
-		Horizon::RayRenderer::BeginScene(m_CameraController.GetCamera());
-		
-
-		//Horizon::RayRenderer::EndScene();
-	}
+	Horizon::RayRenderer::BeginScene(m_CameraController.GetCamera(), m_App.GetDimensions(), m_Time);
+	m_Time += ts;
 }
 
 void RayRendering::OnImGuiRender()

@@ -54,6 +54,14 @@ namespace Horizon {
 		return m_ViewProjectionMatrix;
 	}
 
+	const glm::mat4& PerspectiveCamera::GetInverseProjection() const {
+		return m_InverseProjectionMatrix;
+	}
+
+	const glm::mat4& PerspectiveCamera::GetInverseView() const {
+		return m_InverseViewMatrix;
+	}
+
 	glm::vec3 PerspectiveCamera::GetFront() const {
 		return m_Front;
 	}
@@ -75,6 +83,8 @@ namespace Horizon {
 	{
 		m_ViewMatrix = glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		m_InverseViewMatrix = glm::inverse(m_ViewMatrix);
+		m_InverseProjectionMatrix = glm::inverse(m_ProjectionMatrix);
 	}
 
 	void PerspectiveCamera::UpdateDirectionVectors() 
@@ -99,5 +109,4 @@ namespace Horizon {
 		m_ProjectionMatrix = glm::perspective(glm::radians(m_FOV), m_AspectRatio, m_NearPlane, m_FarPlane);
 	}
 
-	
 }

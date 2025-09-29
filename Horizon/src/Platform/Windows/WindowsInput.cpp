@@ -22,7 +22,7 @@ namespace Horizon {
 		return state == GLFW_PRESS;
 	}
 
-	std::pair<float, float> WindowsInput::GetMousePositionImpl()
+	glm::vec2 WindowsInput::GetMousePositionImpl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
@@ -33,13 +33,26 @@ namespace Horizon {
 
 	float WindowsInput::GetMouseXImpl()
 	{
-		auto [x, y] = GetMousePositionImpl();
+		float x = GetMousePositionImpl().x;
 		return x;
 	}
 
 	float WindowsInput::GetMouseYImpl()
 	{
-		auto [x, y] = GetMousePositionImpl();
+		float y = GetMousePositionImpl().y;
 		return y;
+	}
+
+	void WindowsInput::SetCursorModeImpl(int mode)
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		if(mode == 1)
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		else if (mode == 2)
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		else 
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+
 	}
 }

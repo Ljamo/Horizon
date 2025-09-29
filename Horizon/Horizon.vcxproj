@@ -143,6 +143,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Horizon\Renderer\RayTracingCamera.h" />
     <ClInclude Include="src\Horizon.h" />
     <ClInclude Include="src\Horizon\Audio\AudioData.h" />
     <ClInclude Include="src\Horizon\Audio\MaterialProperties.h" />
@@ -610,6 +611,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Horizon\Renderer\RayTracingCamera.cpp" />
     <ClCompile Include="src\Horizon\Audio\AudioData.cpp" />
     <ClCompile Include="src\Horizon\Audio\MaterialProperties.cpp" />
     <ClCompile Include="src\Horizon\Core\Application.cpp" />

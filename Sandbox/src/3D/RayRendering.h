@@ -16,7 +16,7 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Horizon::Event& e) override;
 private:
-	Horizon::PerspectiveCameraController m_CameraController;
+	Horizon::RayTracingCamera m_CameraController;
 
 	struct ProfileResult
 	{
@@ -32,10 +32,13 @@ private:
 		glm::vec3 center;
 		float radius;
 		glm::vec3 color;
-		float _pad; // padding for std430 alignment
+		float roughness; // padding for std430 alignment
 	};
+
+	Horizon::Application& m_App = Horizon::Application::Get();
 
 
 	std::vector<Sphere> m_Spheres;
 
+	long double m_Time = 0;
 };

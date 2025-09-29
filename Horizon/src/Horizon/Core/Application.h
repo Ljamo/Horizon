@@ -11,6 +11,8 @@
 
 #include "Horizon/ImGui/ImGuiLayer.h"
 
+#include "glm/glm.hpp"
+
 namespace Horizon {
 
 	class HORIZON_API Application
@@ -31,6 +33,8 @@ namespace Horizon {
 		inline static Application& Get() { return *s_Instance; }
 
 		void EndApplication() { m_Running = false; }
+
+		inline const glm::vec2 GetDimensions() { return glm::vec2(m_Window.get()->GetWidth(), m_Window.get()->GetHeight()); }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);

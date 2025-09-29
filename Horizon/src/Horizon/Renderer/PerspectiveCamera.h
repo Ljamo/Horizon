@@ -24,11 +24,16 @@ namespace Horizon {
 		const glm::mat4& GetProjectionMatrix() const;
 		const glm::mat4& GetViewMatrix() const;
 		const glm::mat4& GetViewProjectionMatrix() const;
+		const glm::mat4& GetInverseProjection() const;
+		const glm::mat4& GetInverseView() const;
 
 		glm::vec3 GetFront() const;
 		glm::vec3 GetRight() const;
 		glm::vec3 GetUp() const;
 		glm::vec3 GetWorldUp() const;
+
+		const float GetFOV() const { return m_FOV; }
+		const float GetAspectRatio() const { return m_AspectRatio; }
 
 	private:
 		void RecalculateViewMatrix();
@@ -46,6 +51,8 @@ namespace Horizon {
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ViewProjectionMatrix;
+		glm::mat4 m_InverseViewMatrix;
+		glm::mat4 m_InverseProjectionMatrix;
 
 		float m_FOV;
 		float m_AspectRatio;
